@@ -20,7 +20,7 @@ const DarkMode = () => {
   };
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
+    const savedTheme = localStorage.getItem("theme") || "dark";
     const toggle = document.getElementById("darkmode-toggle");
 
     if (savedTheme === "light") {

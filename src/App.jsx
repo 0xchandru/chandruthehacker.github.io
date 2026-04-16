@@ -56,9 +56,7 @@ const getInitialTheme = () => {
 
   if (stored === "dark" || stored === "light") return stored;
 
-  // Optional: follow system preference
-  const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-  return prefersDark ? "dark" : "light";
+  return "dark";
 };
 
 
