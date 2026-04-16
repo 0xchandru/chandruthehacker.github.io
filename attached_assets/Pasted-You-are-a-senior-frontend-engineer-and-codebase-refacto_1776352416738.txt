@@ -1,0 +1,1627 @@
+You are a senior frontend engineer and codebase refactoring expert.
+
+I have an existing React portfolio project (using styled-components, CRA setup, component-based architecture).
+
+I will provide:
+1. My EXISTING codebase (already open in workspace)
+2. A NEW architecture + UI/UX + content redesign plan (from Claude)
+
+Your task is to ANALYZE my current codebase and APPLY the new design intelligently.
+
+⚠️ IMPORTANT:
+- DO NOT rewrite everything from scratch
+- DO NOT break existing working functionality
+- DO NOT introduce unnecessary complexity
+
+---
+
+# 🎯 OBJECTIVE
+
+Refactor my portfolio into a **clean, production-quality, recruiter-focused cybersecurity portfolio**
+
+---
+
+# 🧠 STEP 1 — ANALYZE CURRENT CODEBASE
+
+First:
+- Scan full project structure
+- Understand components, data flow, styling approach
+- Identify reusable parts vs parts to refactor
+
+Output:
+- What can be reused
+- What must be modified
+- What should be removed
+
+---
+
+# 🏗 STEP 2 — APPLY NEW ARCHITECTURE
+
+Based on the new design:
+
+- Restructure folders if needed
+- Improve component modularity
+- Separate concerns (UI vs content vs logic)
+
+Follow:
+- Clean architecture principles
+- Reusability
+- Maintainability
+
+---
+
+# 🎨 STEP 3 — UI REFACTOR (CRITICAL)
+
+Apply redesigned UI for:
+
+## Projects Section
+- Upgrade ProjectCard UI
+- Implement structured project detail layout (NOT plain markdown)
+- Add sections like:
+  - Overview
+  - Problem
+  - Approach
+  - Tools
+  - Logs / Output
+  - Results
+
+## Certifications Section
+- Replace simple cards with rich UI:
+  - Issuer
+  - Skills
+  - Verification link
+  - Status badge
+- Improve layout and spacing
+
+## Experience / Education Section
+- Remove incorrect “experience” timeline
+- Implement improved structure:
+  (education + practical experience / labs / projects)
+
+---
+
+# ✍️ STEP 4 — CONTENT INTEGRATION
+
+- Replace all existing content with new content provided
+- Ensure:
+  - Clean formatting
+  - Proper hierarchy (headings, sections)
+  - No raw markdown dumps
+
+---
+
+# ⚙️ STEP 5 — CODE QUALITY IMPROVEMENTS
+
+Fix issues identified earlier:
+
+- Remove unused dependencies
+- Remove unused files/components
+- Fix broken links
+- Remove dead sections (like unused Labs if applicable)
+- Standardize styling (use styled-components consistently)
+
+---
+
+# 🔐 STEP 6 — SAFETY + BEST PRACTICES
+
+- Remove dangerous patterns (e.g., unsafe HTML rendering if present)
+- Ensure external links use rel="noopener noreferrer"
+- Clean up any exposed configs (like EmailJS usage patterns if visible)
+
+---
+
+# ⚡ STEP 7 — PERFORMANCE + CLEANUP
+
+- Remove unnecessary preloader delay or optimize it
+- Reduce bundle size where possible
+- Ensure lazy loading still works correctly
+
+---
+
+# 📁 OUTPUT REQUIREMENTS
+
+When suggesting changes:
+
+- Show EXACT file paths
+- Provide FULL updated code (not partial snippets)
+- Keep changes modular (file-by-file)
+
+Example:
+src/components/ProjectCard.jsx
+[full updated code]
+
+src/components/Projects.jsx
+[full updated code]
+
+---
+
+# ⚠️ RULES
+
+- Prefer refactoring over rewriting
+- Keep code readable and simple
+- Avoid overengineering
+- Maintain consistency with existing tech (React + styled-components)
+
+---
+
+# 📥 INPUT (NEW DESIGN)
+
+Here is the redesigned architecture, UI, and content:
+
+COMPLETE PORTFOLIO REDESIGN — BLUEPRINT
+1. EXPERIENCE SECTION — FULL RESTRUCTURE
+The Problem
+You are a student. You have zero full-time job experience. Putting "Education" and "Experience" in a single timeline makes the section look padded and dishonest. Recruiters see through this instantly.
+
+The Decision
+Kill the word "Experience." Replace the entire section with two distinct sections.
+
+Section A: Education
+Section B: Practical Exposure
+
+"Practical Exposure" is the correct framing. It is not fake job experience. It is not "projects" (those get their own section). It communicates: "I have done real work in controlled environments that maps directly to what your SOC team does daily."
+
+Section A — Education
+Minimal. Clean. Not the star of the show.
+
+text
+
+┌─────────────────────────────────────────────────────┐
+│  🎓 EDUCATION                                       │
+│                                                      │
+│  ┌───────────────────────────────────────────────┐   │
+│  │  [University Logo]                            │   │
+│  │                                               │   │
+│  │  B.Tech Computer Science & Engineering        │   │
+│  │  Your University Name                         │   │
+│  │  2021 — 2025 (Expected)                       │   │
+│  │                                               │   │
+│  │  Relevant Coursework:                         │   │
+│  │  ┌──────────┐ ┌──────────────┐ ┌───────────┐ │   │
+│  │  │ Networks │ │ Cryptography │ │ OS Internals│ │   │
+│  │  └──────────┘ └──────────────┘ └───────────┘ │   │
+│  │  ┌────────────────┐ ┌──────────────────────┐ │   │
+│  │  │ Data Structures│ │ Information Security │ │   │
+│  │  └────────────────┘ └──────────────────────┘ │   │
+│  └───────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────┘
+Rules:
+
+One card only. No timeline. A timeline with one node looks sad.
+University logo on the left, details on the right.
+Coursework shown as small chips/badges, not a paragraph.
+No GPA unless it is above 3.7/4.0 or 8.5/10.
+Section B — Practical Exposure
+This is where you prove you are not a textbook student.
+
+Structure: Vertical timeline with category markers
+
+Each entry gets a category tag that tells the recruiter what kind of exposure it was.
+
+Categories:
+
+LAB — Hands-on lab environments (TryHackMe, HackTheBox, CyberDefenders)
+SIMULATION — Job simulations (Forage, virtual internships)
+RESEARCH — Independent research or write-ups
+COMPETITION — CTFs, hackathons
+text
+
+┌──────────────────────────────────────────────────────────────┐
+│  ⚡ PRACTICAL EXPOSURE                                       │
+│                                                               │
+│  "What I've done maps to what your SOC team does daily."     │
+│                                                               │
+│  ──●── [LAB]  SOC Level 1 Analyst Path — TryHackMe          │
+│  │     Completed 48 rooms covering log analysis, SIEM        │
+│  │     operations, phishing triage, and endpoint detection.  │
+│  │     Analyzed 200+ simulated alerts across Splunk and      │
+│  │     ELK Stack environments.                               │
+│  │     ┌────────┐ ┌───────┐ ┌─────────────┐                 │
+│  │     │ Splunk │ │ Wireshark│ │ MITRE ATT&CK│              │
+│  │     └────────┘ └───────┘ └─────────────┘                 │
+│  │     📅 Jan 2024 — Mar 2024                                │
+│  │                                                           │
+│  ──●── [SIMULATION]  Mastercard Cybersecurity Virtual        │
+│  │     Internship — Forage                                   │
+│  │     Designed phishing awareness training. Identified      │
+│  │     threat patterns in simulated corporate email traffic. │
+│  │     Built risk matrix mapping attack vectors to business  │
+│  │     impact.                                               │
+│  │     ┌──────────────┐ ┌─────────────┐                     │
+│  │     │ Phishing Analysis│ │ Risk Assessment│               │
+│  │     └──────────────┘ └─────────────┘                     │
+│  │     📅 Nov 2023                                           │
+│  │                                                           │
+│  ──●── [COMPETITION]  National Level CTF — Top 15%           │
+│  │     Solved 12 challenges across forensics, crypto, and   │
+│  │     web exploitation categories. Performed memory dump   │
+│  │     analysis using Volatility and extracted hidden flags  │
+│  │     from packet captures.                                │
+│  │     ┌───────────┐ ┌──────────┐ ┌────────────┐           │
+│  │     │ Volatility│ │ Burp Suite│ │ Wireshark  │           │
+│  │     └───────────┘ └──────────┘ └────────────┘           │
+│  ──●── [LAB]  CyberDefenders — Blue Team Challenges          │
+│       Completed Malware Traffic Analysis, Threat Hunting,   │
+│       and Log Analysis challenge sets. Parsed pcap files    │
+│       and correlated IOCs against threat intelligence feeds.│
+│       📅 Ongoing                                             │
+└──────────────────────────────────────────────────────────────┘
+Implementation details:
+
+React
+
+// ExposureEntry category badge component
+const CategoryBadge = styled.span`
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+
+  ${({ type }) => {
+    switch (type) {
+      case 'LAB':
+        return `background: rgba(0, 255, 136, 0.12); color: #00ff88; border: 1px solid rgba(0, 255, 136, 0.3);`;
+      case 'SIMULATION':
+        return `background: rgba(0, 170, 255, 0.12); color: #00aaff; border: 1px solid rgba(0, 170, 255, 0.3);`;
+      case 'RESEARCH':
+        return `background: rgba(255, 170, 0, 0.12); color: #ffaa00; border: 1px solid rgba(255, 170, 0, 0.3);`;
+      case 'COMPETITION':
+        return `background: rgba(255, 68, 68, 0.12); color: #ff4444; border: 1px solid rgba(255, 68, 68, 0.3);`;
+      default:
+        return '';
+    }
+  }}
+`;
+Data shape for constants:
+
+JavaScript
+
+export const practicalExposure = [
+  {
+    category: "LAB",
+    title: "SOC Level 1 Analyst Path",
+    platform: "TryHackMe",
+    description: "Completed 48 rooms covering log analysis, SIEM operations, phishing triage, and endpoint detection. Analyzed 200+ simulated alerts across Splunk and ELK Stack environments.",
+    tools: ["Splunk", "Wireshark", "MITRE ATT&CK"],
+    date: "Jan 2024 — Mar 2024",
+    proof: "https://tryhackme.com/p/yourprofile" // optional
+  },
+  // ...
+];
+2. PROJECTS SECTION — COMPLETE REDESIGN
+A. Project Card (Preview State)
+The 3-second rule: A recruiter glances at your project card for 3 seconds. In that time they must understand: what you built, what domain it is in, and how serious you are.
+
+Card Anatomy:
+
+text
+
+┌────────────────────────────────────────────────────┐
+│                                                     │
+│  ┌───────────────────────────────────────────────┐  │
+│  │                                               │  │
+│  │         PROJECT SCREENSHOT / DIAGRAM          │  │
+│  │         (Terminal output, dashboard,          │  │
+│  │          or architecture diagram)             │  │
+│  │                                               │  │
+│  │  ┌────────────────┐                           │  │
+│  │  │ 🔴 OFFENSIVE   │  ← Category overlay      │  │
+│  │  └────────────────┘                           │  │
+│  └───────────────────────────────────────────────┘  │
+│                                                     │
+│  Network Intrusion Detection System                 │
+│  Using Snort + Custom Sigma Rules                   │
+│                                                     │
+│  Monitored live traffic on a home lab network,      │
+│  wrote 15 custom detection rules, and reduced       │
+│  false positives by 40% through iterative tuning.   │
+│                                                     │
+│  ┌────────┐ ┌───────┐ ┌────────┐ ┌──────────┐     │
+│  │ Snort  │ │ Sigma │ │ Python │ │ Wireshark│      │
+│  └────────┘ └───────┘ └────────┘ └──────────┘     │
+│                                                     │
+│  ┌─────────────────┐  ┌─────────────────────────┐  │
+│  │ 15 custom rules │  │ 40% fewer false pos.    │  │
+│  └─────────────────┘  └─────────────────────────┘  │
+│                                                     │
+│  ┌──────────┐  ┌──────────┐                        │
+│  │  GitHub  │  │  Details →│                        │
+│  └──────────┘  └──────────┘                        │
+│                                                     │
+└────────────────────────────────────────────────────┘
+Key elements on every card:
+
+Element	Purpose
+Project image	Screenshot, terminal output, or architecture diagram — NOT generic stock images
+Category overlay	Color-coded: OFFENSIVE (red), DEFENSIVE (blue), FORENSICS (amber), AUTOMATION (green)
+Title + subtitle	Title is the system name. Subtitle names the core technology.
+One-liner summary	What you did + one measurable outcome. Max 2 lines.
+Tech chips	4-5 max. Not 12.
+Metric badges	1-2 quantified proof points: rules written, alerts triaged, packets analyzed
+Action buttons	GitHub + Details. If no GitHub, show Details only. Never show an empty GitHub link.
+Category filter tabs above the grid:
+
+text
+
+┌──────┐ ┌───────────┐ ┌───────────┐ ┌──────────┐ ┌────────────┐
+│ All  │ │ Defensive │ │ Offensive │ │ Forensics│ │ Automation │
+└──────┘ └───────────┘ └───────────┘ └──────────┘ └────────────┘
+Card component structure:
+
+React
+
+const ProjectCard = styled.div`
+  background: ${({ theme }) => theme.card};
+  border: 1px solid ${({ theme }) => theme.cardBorder || 'rgba(255,255,255,0.06)'};
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: ${({ accent }) => accent || '#00ff88'};
+  }
+`;
+
+const CategoryOverlay = styled.span`
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+
+  ${({ category }) => {
+    const colors = {
+      OFFENSIVE: { bg: 'rgba(255,68,68,0.85)', text: '#fff' },
+      DEFENSIVE: { bg: 'rgba(0,136,255,0.85)', text: '#fff' },
+      FORENSICS: { bg: 'rgba(255,170,0,0.85)', text: '#1a1a1a' },
+      AUTOMATION: { bg: 'rgba(0,255,136,0.85)', text: '#1a1a1a' },
+    };
+    const c = colors[category] || colors.DEFENSIVE;
+    return `background: ${c.bg}; color: ${c.text};`;
+  }}
+`;
+
+const MetricBadge = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #00ff88;
+`;
+B. Project Details View — Structured Report Layout
+Kill the markdown blob. Replace it with a structured investigation report.
+
+This is a cybersecurity portfolio. Your project detail should read like a security assessment report, not a blog post.
+
+Detail view structure:
+
+text
+
+┌──────────────────────────────────────────────────────────────┐
+│  ✕ Close                                                     │
+│                                                              │
+│  ┌──────────────────────────────────────────────────────┐    │
+│  │         PROJECT BANNER IMAGE / DIAGRAM               │    │
+│  └──────────────────────────────────────────────────────┘    │
+│                                                              │
+│  Network Intrusion Detection System                          │
+│  ┌───────────┐ ┌────────┐ ┌──────────┐                     │
+│  │ DEFENSIVE │ │ Active │ │ Solo     │                      │
+│  └───────────┘ └────────┘ └──────────┘                     │
+│                                                              │
+│  ┌──────────────────── TLDR ────────────────────────────┐   │
+│  │  Built a network intrusion detection pipeline using  │   │
+│  │  Snort on a home lab. Wrote 15 custom Sigma rules.   │   │
+│  │  Reduced false positive rate by 40% over 3 tuning    │   │
+│  │  iterations. Processed 50K+ packets across 72 hours. │   │
+│  └──────────────────────────────────────────────────────┘   │
+│                                                              │
+│  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   │
+│                                                              │
+│  🎯 PROBLEM                                                  │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │  Home networks lack visibility into malicious        │   │
+│  │  traffic. Default router logging captures nothing    │   │
+│  │  useful. I needed a system that could detect scans,  │   │
+│  │  C2 callbacks, and lateral movement attempts in      │   │
+│  │  real time.                                          │   │
+│  └──────────────────────────────────────────────────────┘   │
+│                                                              │
+│  🔧 APPROACH                                                 │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │  1. Deployed Snort in IDS mode on a dedicated        │   │
+│  │     Raspberry Pi monitoring the LAN segment          │   │
+│  │  2. Wrote custom rules targeting:                    │   │
+│  │     • Port scan detection (SYN flood patterns)       │   │
+│  │     • DNS exfiltration (abnormal query lengths)       │   │
+│  │     • Known C2 domain callbacks                      │   │
+│  │  3. Fed alerts into ELK stack for correlation        │   │
+│  │  4. Iterated rules 3 times to reduce noise           │   │
+│  └──────────────────────────────────────────────────────┘   │
+│                                                              │
+│  🛠️ TOOLS & TECH                                             │
+│  ┌────────┐ ┌───────────┐ ┌────────┐ ┌──────────────┐      │
+│  │ Snort  │ │ ELK Stack │ │ Python │ │ Sigma Rules  │      │
+│  │        │ │           │ │        │ │              │       │
+│  │ [icon] │ │   [icon]  │ │ [icon] │ │    [icon]   │       │
+│  └────────┘ └───────────┘ └────────┘ └──────────────┘      │
+│                                                              │
+│  ⚔️ ATTACK SCENARIO / SIMULATION                             │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │  ┌─────────────────────────────────────────────┐     │   │
+│  │  │  ATTACKER                                   │     │   │
+│  │  │  Kali Linux (192.168.1.50)                  │     │   │
+│  │  │  ↓ nmap SYN scan → target                   │     │   │
+│  │  │  ↓ DNS exfil payload → evil.example.com     │     │   │
+│  │  │  ↓ Reverse shell attempt → port 4444        │     │   │
+│  │  │                                             │     │   │
+│  │  │  DEFENDER (This System)                     │     │   │
+│  │  │  Snort IDS (192.168.1.1)                    │     │   │
+│  │  │  ↓ Alert: SYN_FLOOD_DETECTED               │     │   │
+│  │  │  ↓ Alert: DNS_EXFIL_LONG_QUERY             │     │   │
+│  │  │  ↓ Alert: REVERSE_SHELL_OUTBOUND           │     │   │
+│  │  └─────────────────────────────────────────────┘     │   │
+│  └──────────────────────────────────────────────────────┘   │
+│                                                              │
+│  📋 EVIDENCE / LOGS                                          │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │  ┌─── snort_alert.log ──────────────────────────┐   │   │
+│  │  │  [**] [1:1000001:1] SYN_FLOOD_DETECTED       │   │   │
+│  │  │  [Priority: 1] 04/15-14:23:07.332122          │   │   │
+│  │  │  192.168.1.50:43210 -> 192.168.1.100:80       │   │   │
+│  │  │                                                │   │   │
+│  │  │  [**] [1:1000003:1] DNS_EXFIL_LONG_QUERY     │   │   │
+│  │  │  [Priority: 2] 04/15-14:23:09.112834          │   │   │
+│  │  │  192.168.1.50:53421 -> 8.8.8.8:53             │   │   │
+│  │  └────────────────────────────────────────────────┘   │   │
+│  └──────────────────────────────────────────────────────┘   │
+│                                                              │
+│  📊 RESULTS                                                  │
+│  ┌────────────┐  ┌─────────────┐  ┌───────────────────┐    │
+│  │ 15         │  │ 50,000+     │  │ 40%               │    │
+│  │ Custom     │  │ Packets     │  │ Fewer false       │    │
+│  │ Rules      │  │ Analyzed    │  │ positives         │    │
+│  └────────────┘  └─────────────┘  └───────────────────┘    │
+│                                                              │
+│  🔗 MITRE ATT&CK MAPPING                                    │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │  T1046 — Network Service Scanning     → Detected    │    │
+│  │  T1071.004 — DNS Exfiltration         → Detected    │    │
+│  │  T1059.004 — Unix Shell Execution     → Detected    │    │
+│  └──────────────────────────────────────────────────────┘   │
+│                                                              │
+│  ┌───────────────┐  ┌────────────────┐                      │
+│  │  View on GitHub│  │  Live Demo     │                      │
+│  └───────────────┘  └────────────────┘                      │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+UI Components for Detail View:
+
+React
+
+// TLDR Box — highlighted summary
+const TLDRBox = styled.div`
+  background: rgba(0, 255, 136, 0.04);
+  border-left: 3px solid #00ff88;
+  padding: 16px 20px;
+  border-radius: 0 8px 8px 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: ${({ theme }) => theme.textSecondary};
+  margin: 20px 0;
+`;
+
+// Code/Log Block
+const LogBlock = styled.pre`
+  background: #0a0a0a;
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  border-radius: 8px;
+  padding: 16px 20px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #00ff88;
+  overflow-x: auto;
+  position: relative;
+
+  &::before {
+    content: attr(data-filename);
+    position: absolute;
+    top: 0;
+    left: 16px;
+    transform: translateY(-50%);
+    background: #0a0a0a;
+    padding: 2px 10px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    border: 1px solid rgba(0,255,136,0.15);
+    border-radius: 4px;
+  }
+`;
+
+// Metric Card
+const MetricCard = styled.div`
+  text-align: center;
+  padding: 20px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+
+  .value {
+    font-size: 28px;
+    font-weight: 800;
+    color: #00ff88;
+    display: block;
+  }
+  .label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+  }
+`;
+
+// MITRE Tag
+const MitreTag = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 14px;
+
+  .technique {
+    color: ${({ theme }) => theme.textPrimary};
+    font-weight: 500;
+  }
+  .status {
+    color: #00ff88;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+`;
+
+// Attack Flow Diagram container
+const AttackFlowBox = styled.div`
+  background: #050505;
+  border: 1px solid rgba(255, 68, 68, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 2;
+
+  .attacker { color: #ff4444; }
+  .defender { color: #00aaff; }
+  .alert { color: #00ff88; }
+  .arrow { color: rgba(255,255,255,0.3); }
+`;
+
+// Section Header within detail view
+const DetailSectionHeader = styled.h3`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.textPrimary};
+  margin: 32px 0 16px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+  }
+`;
+Updated data shape for project details in constants.js:
+
+JavaScript
+
+export const projects = [
+  {
+    id: "nids-snort",
+    category: "DEFENSIVE",
+    title: "Network Intrusion Detection System",
+    subtitle: "Snort + Custom Sigma Rules",
+    thumbnail: "/assets/projects/nids-dashboard.png",
+    summary: "Monitored live traffic on a home lab, wrote 15 custom detection rules, reduced false positives by 40%.",
+    tools: ["Snort", "ELK Stack", "Python", "Sigma Rules"],
+    metrics: [
+      { value: "15", label: "Custom Rules" },
+      { value: "50K+", label: "Packets Analyzed" },
+      { value: "40%", label: "Fewer False Positives" }
+    ],
+    github: "https://github.com/you/nids-project",
+    demo: null,
+    detail: {
+      tldr: "Built a network intrusion detection pipeline using Snort on a home lab. Wrote 15 custom Sigma rules. Reduced false positive rate by 40% over 3 tuning iterations. Processed 50K+ packets across 72 hours.",
+      problem: "Home networks lack visibility into malicious traffic. Default router logging captures nothing useful. I needed a system that could detect scans, C2 callbacks, and lateral movement attempts in real time.",
+      approach: [
+        "Deployed Snort in IDS mode on a dedicated Raspberry Pi monitoring the LAN segment",
+        "Wrote custom rules targeting port scan detection (SYN flood patterns), DNS exfiltration (abnormal query lengths), and known C2 domain callbacks",
+        "Fed alerts into ELK stack for correlation and visualization",
+        "Iterated rules 3 times to reduce noise"
+      ],
+      attackScenario: {
+        attacker: "Kali Linux (192.168.1.50)",
+        actions: [
+          "nmap SYN scan → target (192.168.1.100)",
+          "DNS exfil payload → evil.example.com",
+          "Reverse shell attempt → port 4444"
+        ],
+        detections: [
+          "Alert: SYN_FLOOD_DETECTED",
+          "Alert: DNS_EXFIL_LONG_QUERY",
+          "Alert: REVERSE_SHELL_OUTBOUND"
+        ]
+      },
+      logs: `[**] [1:1000001:1] SYN_FLOOD_DETECTED
+[Priority: 1] 04/15-14:23:07.332122
+192.168.1.50:43210 -> 192.168.1.100:80
+
+[**] [1:1000003:1] DNS_EXFIL_LONG_QUERY
+[Priority: 2] 04/15-14:23:09.112834
+192.168.1.50:53421 -> 8.8.8.8:53`,
+      logFilename: "snort_alert.log",
+      mitreMapping: [
+        { id: "T1046", name: "Network Service Scanning", status: "Detected" },
+        { id: "T1071.004", name: "DNS Exfiltration", status: "Detected" },
+        { id: "T1059.004", name: "Unix Shell Execution", status: "Detected" }
+      ],
+      results: "Detected all 3 simulated attack phases in real time. Reduced false positives from initial 60% to 20% after rule tuning. System sustained 72h continuous monitoring with zero crashes."
+    }
+  }
+];
+Rendering the detail view — new component:
+
+React
+
+// ProjectDetailView.jsx
+import React from 'react';
+import {
+  TLDRBox,
+  LogBlock,
+  MetricCard,
+  MitreTag,
+  AttackFlowBox,
+  DetailSectionHeader
+} from './DetailComponents'; // extract all styled components
+
+const ProjectDetailView = ({ project, onClose }) => {
+  const { detail, title, tools, metrics, github, demo, category } = project;
+
+  return (
+    <DetailOverlay onClick={onClose}>
+      <DetailContainer onClick={(e) => e.stopPropagation()}>
+        <CloseButton onClick={onClose}>✕</CloseButton>
+
+        <DetailBanner src={project.thumbnail} alt={title} />
+
+        <DetailHeader>
+          <h2>{title}</h2>
+          <BadgeRow>
+            <CategoryOverlay category={category}>{category}</CategoryOverlay>
+            <StatusBadge>Active</StatusBadge>
+          </BadgeRow>
+        </DetailHeader>
+
+        <TLDRBox>{detail.tldr}</TLDRBox>
+
+        <DetailSectionHeader>🎯 Problem</DetailSectionHeader>
+        <p>{detail.problem}</p>
+
+        <DetailSectionHeader>🔧 Approach</DetailSectionHeader>
+        <ol>
+          {detail.approach.map((step, i) => (
+            <li key={i}>{step}</li>
+          ))}
+        </ol>
+
+        <DetailSectionHeader>🛠️ Tools & Tech</DetailSectionHeader>
+        <ToolGrid>
+          {tools.map((tool) => (
+            <ToolChip key={tool}>{tool}</ToolChip>
+          ))}
+        </ToolGrid>
+
+        {detail.attackScenario && (
+          <>
+            <DetailSectionHeader>⚔️ Attack Scenario</DetailSectionHeader>
+            <AttackFlowBox>
+              <div className="attacker">ATTACKER — {detail.attackScenario.attacker}</div>
+              {detail.attackScenario.actions.map((action, i) => (
+                <div key={i}><span className="arrow">↓</span> {action}</div>
+              ))}
+              <br />
+              <div className="defender">DEFENDER — This System</div>
+              {detail.attackScenario.detections.map((det, i) => (
+                <div key={i} className="alert"><span className="arrow">↓</span> {det}</div>
+              ))}
+            </AttackFlowBox>
+          </>
+        )}
+
+        {detail.logs && (
+          <>
+            <DetailSectionHeader>📋 Evidence / Logs</DetailSectionHeader>
+            <LogBlock data-filename={detail.logFilename}>
+              {detail.logs}
+            </LogBlock>
+          </>
+        )}
+
+        <DetailSectionHeader>📊 Results</DetailSectionHeader>
+        <MetricGrid>
+          {metrics.map((m) => (
+            <MetricCard key={m.label}>
+              <span className="value">{m.value}</span>
+              <span className="label">{m.label}</span>
+            </MetricCard>
+          ))}
+        </MetricGrid>
+        <p>{detail.results}</p>
+
+        {detail.mitreMapping && (
+          <>
+            <DetailSectionHeader>🔗 MITRE ATT&CK Mapping</DetailSectionHeader>
+            {detail.mitreMapping.map((m) => (
+              <MitreTag key={m.id}>
+                <span className="technique">{m.id} — {m.name}</span>
+                <span className="status">{m.status}</span>
+              </MitreTag>
+            ))}
+          </>
+        )}
+
+        <ActionRow>
+          {github && <ActionButton href={github} target="_blank" rel="noopener noreferrer">View on GitHub</ActionButton>}
+          {demo && <ActionButton href={demo} target="_blank" rel="noopener noreferrer" secondary>Live Demo</ActionButton>}
+        </ActionRow>
+      </DetailContainer>
+    </DetailOverlay>
+  );
+};
+
+export default ProjectDetailView;
+3. CERTIFICATIONS SECTION — REDESIGN
+Current state: Weak
+An image, a name, a date, a button. That communicates nothing about credibility.
+
+New design:
+text
+
+┌────────────────────────────────────────────────────────────┐
+│  🏆 CERTIFICATIONS                                         │
+│                                                             │
+│  ┌────────────────────────────────────────────────────┐    │
+│  │                                                    │    │
+│  │  ┌────────┐  Google Cybersecurity                 │    │
+│  │  │ Google │  Professional Certificate             │    │
+│  │  │ [logo] │                                       │    │
+│  │  └────────┘  Issued by: Google via Coursera       │    │
+│  │              Completed: March 2024                │    │
+│  │              Credential ID: ABC123XYZ             │    │
+│  │                                                    │    │
+│  │  Skills Gained:                                   │    │
+│  │  ┌────────────┐ ┌─────────┐ ┌──────────────┐    │    │
+│  │  │ SIEM Ops   │ │ Linux   │ │ Incident Resp│    │    │
+│  │  └────────────┘ └─────────┘ └──────────────┘    │    │
+│  │  ┌──────────────┐ ┌────────────┐                 │    │
+│  │  │ Network Sec  │ │ Python     │                 │    │
+│  │  └──────────────┘ └────────────┘                 │    │
+│  │                                                    │    │
+│  │  ┌──────────────────┐                             │    │
+│  │  │ ✓ VERIFIED       │  ← green accent            │    │
+│  │  │   Verify →       │                             │    │
+│  │  └──────────────────┘                             │    │
+│  │                                                    │    │
+│  └────────────────────────────────────────────────────┘    │
+│                                                             │
+│  ┌────────────────────────────────────────────────────┐    │
+│  │                                                    │    │
+│  │  ┌────────┐  CompTIA Security+                    │    │
+│  │  │CompTIA │  (In Progress)                        │    │
+│  │  │ [logo] │                                       │    │
+│  │  └────────┘  Expected: August 2024                │    │
+│  │                                                    │    │
+│  │  Target Skills:                                   │    │
+│  │  ┌────────────────┐ ┌───────────────┐            │    │
+│  │  │ Threat Analysis│ │ Risk Mgmt     │            │    │
+│  │  └────────────────┘ └───────────────┘            │    │
+│  │                                                    │    │
+│  │  ┌──────────────────┐                             │    │
+│  │  │ ◐ IN PROGRESS    │  ← amber accent            │    │
+│  │  │   60% complete   │                             │    │
+│  │  └──────────────────┘                             │    │
+│  │                                                    │    │
+│  └────────────────────────────────────────────────────┘    │
+└────────────────────────────────────────────────────────────┘
+Data shape:
+
+JavaScript
+
+export const certifications = [
+  {
+    name: "Google Cybersecurity Professional Certificate",
+    issuer: "Google",
+    platform: "Coursera",
+    issuerLogo: "/assets/icons/google.png",
+    completedDate: "March 2024",
+    credentialId: "ABC123XYZ",
+    verifyUrl: "https://coursera.org/verify/ABC123XYZ",
+    status: "COMPLETED", // or "IN_PROGRESS"
+    progress: 100, // percentage, only matters for IN_PROGRESS
+    skills: ["SIEM Operations", "Linux Administration", "Incident Response", "Network Security", "Python Scripting"],
+  },
+  {
+    name: "CompTIA Security+",
+    issuer: "CompTIA",
+    platform: null,
+    issuerLogo: "/assets/icons/comptia.png",
+    completedDate: null,
+    expectedDate: "August 2024",
+    credentialId: null,
+    verifyUrl: null,
+    status: "IN_PROGRESS",
+    progress: 60,
+    skills: ["Threat Analysis", "Risk Management", "Cryptography"],
+  }
+];
+Component implementation:
+
+React
+
+const CertCard = styled.div`
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  background: ${({ theme }) => theme.card};
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  transition: border-color 0.25s ease;
+
+  &:hover {
+    border-color: ${({ status }) =>
+      status === 'COMPLETED' ? '#00ff88' : '#ffaa00'};
+  }
+`;
+
+const IssuerLogo = styled.div`
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+`;
+
+const StatusBadge = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  cursor: ${({ clickable }) => clickable ? 'pointer' : 'default'};
+
+  ${({ status }) => status === 'COMPLETED' ? `
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    color: #00ff88;
+  ` : `
+    background: rgba(255, 170, 0, 0.1);
+    border: 1px solid rgba(255, 170, 0, 0.3);
+    color: #ffaa00;
+  `}
+`;
+
+// Progress bar for in-progress certs
+const ProgressBar = styled.div`
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    display: block;
+    width: ${({ progress }) => progress}%;
+    height: 100%;
+    background: #ffaa00;
+    border-radius: 2px;
+    transition: width 0.6s ease;
+  }
+`;
+
+const CertificateCard = ({ cert }) => (
+  <CertCard status={cert.status}>
+    <IssuerLogo>
+      <img src={cert.issuerLogo} alt={cert.issuer} />
+    </IssuerLogo>
+    <div>
+      <h3>{cert.name}</h3>
+      {cert.status === 'IN_PROGRESS' && <InProgressLabel>(In Progress)</InProgressLabel>}
+      <MetaLine>
+        {cert.platform
+          ? `Issued by: ${cert.issuer} via ${cert.platform}`
+          : `Issued by: ${cert.issuer}`
+        }
+      </MetaLine>
+      {cert.completedDate && <MetaLine>Completed: {cert.completedDate}</MetaLine>}
+      {cert.expectedDate && <MetaLine>Expected: {cert.expectedDate}</MetaLine>}
+      {cert.credentialId && <MetaLine>Credential ID: {cert.credentialId}</MetaLine>}
+
+      <SkillRow>
+        {cert.skills.map(s => <SkillChip key={s}>{s}</SkillChip>)}
+      </SkillRow>
+
+      {cert.status === 'COMPLETED' && cert.verifyUrl && (
+        <StatusBadge status="COMPLETED" as="a" href={cert.verifyUrl}
+          target="_blank" rel="noopener noreferrer" clickable>
+          ✓ Verified — Verify →
+        </StatusBadge>
+      )}
+
+      {cert.status === 'IN_PROGRESS' && (
+        <>
+          <StatusBadge status="IN_PROGRESS">
+            ◐ In Progress — {cert.progress}%
+          </StatusBadge>
+          <ProgressBar progress={cert.progress} />
+        </>
+      )}
+    </div>
+  </CertCard>
+);
+Layout: Stack, not grid. Certificates are credential documents. They read better as full-width list items than as tiny cards you squint at. Use a single-column stack with generous padding.
+
+4. CONTENT REWRITE
+Hero Section
+Current (paraphrased): "I am passionate about cybersecurity and love to explore the digital world of security..."
+
+Rewrite:
+
+JavaScript
+
+export const hero = {
+  name: "Chandraprakash",
+  roles: [
+    "SOC Analyst",
+    "Security Researcher",
+    "Threat Hunter"
+  ],
+  tagline: "I detect, investigate, and respond.",
+  description: "Final-year CS student who builds detection systems, " +
+    "writes custom SIEM rules, and hunts threats in lab environments. " +
+    "Completed 200+ TryHackMe rooms. Built 6 security tools. " +
+    "Pursuing SOC Analyst roles where I can turn alerts into answers.",
+  resumeLink: "/resume.pdf"
+};
+Rules applied:
+
+No "passionate." No "enthusiastic." No "aspiring."
+Lead with what you DO, not what you FEEL.
+Numbers prove competence. "200+ rooms" beats "extensive experience."
+End with what you WANT (the job target). Recruiters need to know where to put you.
+About Section
+Kill the wall of text. Replace with a structured snapshot.
+
+JavaScript
+
+export const about = {
+  summary: "I approach security from the defender's side. My focus is " +
+    "building detection pipelines, analyzing malicious traffic, and " +
+    "understanding attacker TTPs through hands-on lab work — not just theory.",
+  highlights: [
+    {
+      icon: "🔍",
+      label: "200+ TryHackMe rooms completed",
+      detail: "SOC L1 path, Pre-Security, Cyber Defense"
+    },
+    {
+      icon: "🛠️",
+      label: "6 security projects built and documented",
+      detail: "NIDS, honeypot, SIEM dashboard, phishing analyzer"
+    },
+    {
+      icon: "📜",
+      label: "4 certifications earned",
+      detail: "Google Cybersecurity, ISC2 CC, and more"
+    },
+    {
+      icon: "🎯",
+      label: "Target role: SOC Analyst / Security Operations",
+      detail: "Available from June 2025"
+    }
+  ]
+};
+Render as icon + stat cards in a 2x2 grid below the summary paragraph. This gives recruiters scannable proof points in 5 seconds.
+
+Project Descriptions (Summary Lines for Cards)
+Bad (current style): "This project is a comprehensive implementation of a network intrusion detection system using advanced monitoring techniques and enterprise-grade tools to ensure complete network visibility."
+
+Good (rewrite for each project):
+
+Project	Card Summary (2 lines max)
+NIDS	Monitored live LAN traffic with Snort. Wrote 15 custom rules targeting SYN floods, DNS exfil, and C2 callbacks. 40% fewer false positives after 3 tuning iterations.
+Honeypot	Deployed Cowrie SSH honeypot on AWS. Captured 12,000+ attack attempts in 30 days. Mapped top attacker IPs to known threat feeds.
+SIEM Dashboard	Built Splunk dashboards parsing Windows Event Logs and Sysmon data. Correlated 5 attack patterns across 10K log entries.
+Phishing Analyzer	Python tool that extracts URLs, checks against VirusTotal API, and flags suspicious headers. Tested against 500 real phishing samples with 92% detection rate.
+Keylogger Detector	Built a Python-based process monitor that flags known keylogger signatures in running processes and DLL injection patterns.
+Vulnerability Scanner	Automated Nmap scan orchestration with Python. Generates structured reports mapping open ports to CVE databases.
+Pattern: [Action verb] + [what you built/did] + [specific technical detail] + [quantified outcome].
+
+Education / Experience Content
+For the education card:
+
+JavaScript
+
+export const education = {
+  degree: "B.Tech in Computer Science & Engineering",
+  institution: "Your University Name",
+  period: "2021 — 2025 (Expected)",
+  relevantCoursework: [
+    "Computer Networks",
+    "Cryptography & Network Security",
+    "Operating Systems",
+    "Data Structures & Algorithms",
+    "Database Management Systems"
+  ]
+};
+For practical exposure entries — example rewrites:
+
+JavaScript
+
+export const practicalExposure = [
+  {
+    category: "LAB",
+    title: "SOC Level 1 Path — TryHackMe",
+    description: "Completed 48 rooms covering alert triage, SIEM log analysis, " +
+      "phishing email investigation, and endpoint detection. Worked with " +
+      "Splunk SPL queries and Wireshark packet analysis across simulated " +
+      "enterprise scenarios.",
+    tools: ["Splunk", "Wireshark", "MITRE ATT&CK", "Sysmon"],
+    date: "Jan 2024 — Mar 2024",
+    proof: "https://tryhackme.com/p/yourprofile"
+  },
+  {
+    category: "SIMULATION",
+    title: "Mastercard Cybersecurity Virtual Internship — Forage",
+    description: "Designed a phishing awareness campaign for a simulated corporate " +
+      "environment. Analyzed email headers to identify spoofed domains. Built " +
+      "a risk matrix mapping 8 attack vectors to business impact levels.",
+    tools: ["Phishing Analysis", "Risk Assessment", "Security Awareness"],
+    date: "Nov 2023",
+    proof: "https://forage.com/verify/XXXXX"
+  },
+  {
+    category: "COMPETITION",
+    title: "National CTF Competition — Top 15%",
+    description: "Solved 12 challenges across forensics, crypto, and web exploitation. " +
+      "Performed memory dump analysis with Volatility. Extracted flags from " +
+      "packet captures using custom Wireshark filters.",
+    tools: ["Volatility", "Burp Suite", "Wireshark", "CyberChef"],
+    date: "Sep 2023",
+    proof: null
+  },
+  {
+    category: "LAB",
+    title: "CyberDefenders Blue Team Challenges",
+    description: "Completed Malware Traffic Analysis and Threat Hunting challenge sets. " +
+      "Parsed pcap files for C2 traffic. Correlated IOCs against AlienVault " +
+      "OTX and VirusTotal threat intelligence feeds.",
+    tools: ["Wireshark", "VirusTotal", "AlienVault OTX"],
+    date: "Ongoing",
+    proof: "https://cyberdefenders.org/p/yourprofile"
+  }
+];
+5. UI/UX IMPROVEMENTS
+Visual Hierarchy Fixes
+Problem: Every section currently uses the same pattern: centered title → paragraph → cards grid. This makes the page feel like a repeating template.
+
+Fix: Give each section a distinct visual rhythm.
+
+Section	Layout	Distinct Treatment
+Hero	Full viewport, centered	Large name, rotating role text, single CTA button, no cards
+About	Left-aligned text + right-side stat cards	2x2 highlight grid next to paragraph. Break from center alignment.
+Education	Single card, centered	Minimal. One clean card. No timeline.
+Practical Exposure	Timeline, left-aligned	Vertical timeline with colored category dots. Different from everything above.
+Projects	Filtered grid	Category tabs + 3-column card grid. Cards have image areas unlike everything else.
+Certifications	Stacked list	Full-width list items. No grid. Reads like a credentials document.
+Contact	Split layout	Left: text + social icons. Right: form. Two-column break from everything else.
+Card Design Fixes
+Universal card tokens (apply to all card types):
+
+JavaScript
+
+const cardBase = css`
+  background: ${({ theme }) => theme.card};
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: transform 0.25s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 255, 136, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+`;
+Each card type gets ONE unique accent treatment:
+
+Card Type	Accent
+Project Card	Category color left-border strip (4px colored left border)
+Cert Card	Status color badge (green verified / amber in-progress)
+Exposure Card	Category dot color on timeline + category badge
+Skill Chip	Icon-only, flat, no border hover
+Interaction Improvements
+Hover states you should implement:
+
+React
+
+// Project card image zoom on hover
+const CardImage = styled.div`
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+
+  img {
+    transition: transform 0.4s ease;
+    width: 100%;
+    display: block;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+`;
+
+// Skill chip pulse on hover (subtle)
+const SkillChip = styled.span`
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  color: #00ff88;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 255, 136, 0.18);
+  }
+`;
+Page scroll animations — keep them MINIMAL:
+
+JavaScript
+
+// motion.js — replace all variants with these two
+export const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+};
+
+export const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.08 }
+  }
+};
+Do NOT use spring physics, bounce, or dramatic slide-ins. They make portfolios feel like template demos. Simple opacity + translateY on scroll-into-view is all you need.
+
+6. ARCHITECTURE IMPROVEMENTS
+Component Restructuring
+Current mess: Everything in src/components/ flat. 20+ files in one folder.
+
+New structure:
+
+text
+
+src/
+├── app/
+│   ├── App.jsx
+│   ├── theme.js            (merged Themes.js)
+│   └── motion.js
+├── data/
+│   ├── hero.js
+│   ├── about.js
+│   ├── education.js
+│   ├── exposure.js
+│   ├── projects.js
+│   ├── certifications.js
+│   └── contact.js
+├── components/
+│   ├── common/
+│   │   ├── SectionWrapper.jsx
+│   │   ├── SectionHeader.jsx
+│   │   ├── Badge.jsx
+│   │   ├── Chip.jsx
+│   │   ├── LogBlock.jsx
+│   │   ├── MetricCard.jsx
+│   │   └── ActionButton.jsx
+│   ├── layout/
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   └── Preloader.jsx
+│   ├── hero/
+│   │   └── Hero.jsx
+│   ├── about/
+│   │   └── About.jsx
+│   ├── education/
+│   │   └── Education.jsx
+│   ├── exposure/
+│   │   ├── ExposureTimeline.jsx
+│   │   └── ExposureCard.jsx
+│   ├── projects/
+│   │   ├── ProjectsSection.jsx
+│   │   ├── ProjectCard.jsx
+│   │   ├── ProjectDetailView.jsx
+│   │   └── AttackFlow.jsx
+│   ├── certifications/
+│   │   ├── CertificationsSection.jsx
+│   │   └── CertCard.jsx
+│   └── contact/
+│       └── Contact.jsx
+├── hooks/
+│   ├── useTheme.js
+│   └── useScrollReveal.js
+├── context/
+│   └── ThemeContext.jsx
+└── utils/
+    └── sanitize.js
+Fix Theme Management
+Kill the MutationObserver. Use React context.
+
+React
+
+// context/ThemeContext.jsx
+import React, { createContext, useState, useContext, useEffect } from 'react';
+
+const ThemeContext = createContext();
+
+export const ThemeProvider = ({ children }) => {
+  const [mode, setMode] = useState(() => {
+    return localStorage.getItem('theme') || 'dark';
+  });
+
+  const toggle = () => {
+    setMode(prev => {
+      const next = prev === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      return next;
+    });
+  };
+
+  return (
+    <ThemeContext.Provider value={{ mode, toggle }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useThemeMode = () => useContext(ThemeContext);
+React
+
+// App.jsx — clean version
+import { ThemeProvider as SCThemeProvider } from 'styled-components';
+import { ThemeProvider, useThemeMode } from './context/ThemeContext';
+import { darkTheme, lightTheme } from './app/theme';
+
+const AppInner = () => {
+  const { mode } = useThemeMode();
+  const theme = mode === 'dark' ? darkTheme : lightTheme;
+
+  return (
+    <SCThemeProvider theme={theme}>
+      {/* sections */}
+    </SCThemeProvider>
+  );
+};
+
+const App = () => (
+  <ThemeProvider>
+    <AppInner />
+  </ThemeProvider>
+);
+Fix Project Markdown Duplication
+Current problem: Both ProjectCard.jsx and ProjectDetails.jsx parse markdown-like text with dangerouslySetInnerHTML. This is duplicated logic and an XSS vector.
+
+Solution: Structured data, not markdown.
+
+The new data shape I defined above in section 2 eliminates markdown entirely. Every project field is typed, structured, and rendered by explicit JSX components. No parsing. No dangerouslySetInnerHTML. No duplication.
+
+If you absolutely need rich text somewhere, use a sanitizer:
+
+JavaScript
+
+// utils/sanitize.js
+import DOMPurify from 'dompurify';
+
+export const sanitize = (html) => DOMPurify.sanitize(html, {
+  ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'code', 'br'],
+  ALLOWED_ATTR: []
+});
+Bash
+
+npm install dompurify
+Reusable Section Wrapper
+Every section uses the same outer pattern. Extract it:
+
+React
+
+// components/common/SectionWrapper.jsx
+import { motion } from 'framer-motion';
+import styled from 'styled-components';
+import { staggerContainer } from '../../app/motion';
+
+const Wrapper = styled.section`
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 24px;
+
+  @media (max-width: 768px) {
+    padding: 60px 16px;
+  }
+`;
+
+const SectionWrapper = ({ id, children }) => (
+  <Wrapper
+    id={id}
+    as={motion.section}
+    variants={staggerContainer}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, amount: 0.1 }}
+  >
+    {children}
+  </Wrapper>
+);
+
+export default SectionWrapper;
+Reusable Section Header
+React
+
+// components/common/SectionHeader.jsx
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { fadeInUp } from '../../app/motion';
+
+const Container = styled(motion.div)`
+  margin-bottom: 48px;
+`;
+
+const Title = styled.h2`
+  font-size: 32px;
+  font-weight: 800;
+  color: ${({ theme }) => theme.textPrimary};
+  margin-bottom: 12px;
+`;
+
+const Subtitle = styled.p`
+  font-size: 16px;
+  color: ${({ theme }) => theme.textSecondary};
+  max-width: 600px;
+  line-height: 1.6;
+`;
+
+const SectionHeader = ({ title, subtitle }) => (
+  <Container variants={fadeInUp}>
+    <Title>{title}</Title>
+    {subtitle && <Subtitle>{subtitle}</Subtitle>}
+  </Container>
+);
+
+export default SectionHeader;
+Fix BrowserRouter
+Remove it. You have no routes. Remove react-router-dom entirely. Anchor navigation works fine without it. This deletes one dependency and one layer of pointless complexity.
+
+Bash
+
+npm uninstall react-router-dom
+Replace any Link components with plain <a href="#section-id"> or smooth-scroll JS:
+
+JavaScript
+
+const scrollTo = (id) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+};
+Kill Unused Dependencies
+Remove all of these from package.json:
+
+text
+
+tailwindcss
+@tailwindcss/forms
+postcss (if only used for tailwind)
+autoprefixer (if only used for tailwind)
+@react-three/* (all three.js packages)
+@radix-ui/* (all radix packages)
+emailjs (keep only @emailjs/browser, remove the duplicate)
+Bash
+
+npm uninstall tailwindcss @tailwindcss/forms autoprefixer \
+  @react-three/fiber @react-three/drei three \
+  @radix-ui/react-dialog @radix-ui/react-slot \
+  emailjs
+7. DIFFERENTIATION — What Makes You Stand Out
+What 90% of Student Portfolios Do
+Generic hero: "Passionate cybersecurity enthusiast"
+Project cards with lorem-ipsum-quality descriptions
+Certification images in a grid
+No evidence of actual work
+Same template visual style
+Zero domain-specific portfolio features
+What YOUR Portfolio Will Do Differently
+1. MITRE ATT&CK Mapping on Every Project
+
+No other student portfolio does this. When a recruiter or hiring manager sees MITRE technique IDs mapped to your detection capabilities, they immediately know you understand enterprise security frameworks — not just textbook theory.
+
+Implementation: Already included in the project detail data shape above. Every project gets a mitreMapping array.
+
+2. Attack Scenario Visualizations
+
+Instead of describing what your project does in paragraphs, you show the attack-defense flow visually. Attacker action → System detection → Alert fired. This is how SOC analysts think. Your portfolio demonstrates that thinking pattern.
+
+3. Live Terminal / Log Evidence
+
+Show actual log output, Snort alerts, Splunk queries, Wireshark filters. Not screenshots. Formatted monospace code blocks with syntax-highlighted output. This is proof, not marketing.
+
+4. Skill-Evidence Cross-Referencing
+
+In the skills section, don't just list "Splunk." Add a hover or link that shows WHERE you used Splunk:
+
+text
+
+┌─────────────────────────────────────────────┐
+│  Splunk                                      │
+│  Used in: NIDS Project, SOC L1 Lab Path     │
+│  Context: SPL queries, alert dashboards,    │
+│           log correlation                    │
+└─────────────────────────────────────────────┘
+Implementation — skill data shape:
+
+JavaScript
+
+export const skills = {
+  "Security Operations": [
+    {
+      name: "Splunk",
+      icon: "/assets/icons/splunk.svg",
+      usedIn: ["nids-snort", "siem-dashboard"],
+      context: "SPL queries, alert dashboards, log correlation"
+    },
+    // ...
+  ]
+};
+When a user hovers or clicks a skill chip, show a tooltip or expandable panel referencing the projects where that skill was used.
+
+5. Threat Intelligence Dashboard Style Stats Section
+
+Add a small stats bar somewhere visible (hero or just below about):
+
+text
+
+┌────────────────────────────────────────────────────────────┐
+│                                                             │
+│  ┌───────────┐  ┌──────────────┐  ┌──────────────────┐    │
+│  │   200+    │  │     6        │  │      4           │    │
+│  │   Labs    │  │   Projects   │  │   Certifications │    │
+│  │ Completed │  │   Built      │  │   Earned         │    │
+│  └───────────┘  └──────────────┘  └──────────────────┘    │
+│  ┌──────────────┐  ┌──────────────────────────────┐       │
+│  │    15+       │  │     50,000+                   │       │
+│  │  Detection   │  │     Packets Analyzed          │       │
+│  │   Rules      │  │     Across Projects           │       │
+│  └──────────────┘  └──────────────────────────────┘       │
+│                                                             │
+└────────────────────────────────────────────────────────────┘
+This is inspired by SOC dashboard KPI panels. It immediately positions you as someone who thinks in operational metrics.
+
+Implementation:
+
+React
+
+const StatBar = styled.div`
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 32px 0;
+`;
+
+const StatItem = styled.div`
+  text-align: center;
+  padding: 20px 32px;
+  background: rgba(0, 255, 136, 0.04);
+  border: 1px solid rgba(0, 255, 136, 0.1);
+  border-radius: 12px;
+  min-width: 140px;
+
+  .number {
+    font-size: 32px;
+    font-weight: 800;
+    color: #00ff88;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .label {
+    font-size: 13px;
+    color: ${({ theme }) => theme.textSecondary};
+    margin-top: 4px;
+  }
+`;
+6. "Currently Learning" Signal
+
+Add a small, living indicator somewhere on the page:
+
+text
+
+┌──────────────────────────────────────────────┐
+│  🟢 Currently working through:               │
+│     CompTIA Security+ (60% complete)         │
+│     HackTheBox ProLabs — Dante              │
+└──────────────────────────────────────────────┘
+This signals to recruiters that you are active and growing. A static portfolio looks abandoned. A portfolio with a "currently learning" section looks alive.
+
+7. PDF Resume Optimization
+
+Add a prominent "Download Resume" button in the hero AND in the navbar. Not buried in the footer. Not a generic link. A styled button.
+
+React
+
+const ResumeButton = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: transparent;
+  border: 2px solid #00ff88;
+  color: #00ff88;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 255, 136, 0.1);
+  }
+
+  svg { width: 16px; height: 16px; }
+`;
+8. Domain-Specific Favicon & Browser Tab
+
+Use a favicon that says "security," not a generic React logo. A small lock icon, shield, or terminal prompt. Small detail, big impression.
+
