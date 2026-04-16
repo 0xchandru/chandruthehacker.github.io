@@ -26,7 +26,7 @@ const Inner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 48px;
+  gap: 10px;
 
   @media (max-width: 960px) {
     flex-direction: column-reverse;
@@ -238,16 +238,16 @@ const GradientBorderWrapper = styled.div`
 
 const ProfileImg = styled.img`
   border-radius: 50%;
-  width: 320px;
-  height: 320px;
+  width: 380px;
+  height: 380px;
   object-fit: cover;
   position: relative;
   z-index: 1;
   display: block;
 
   @media (max-width: 768px) {
-    width: 240px;
-    height: 240px;
+    width: 280px;
+    height: 280px;
   }
 `;
 
