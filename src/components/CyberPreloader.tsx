@@ -130,7 +130,7 @@ const CyberPreloader: React.FC<{ onComplete?: () => void }> = ({ onComplete }) =
   useEffect(() => {
     const timer = setTimeout(() => {
       onComplete?.();
-    }, 3000);
+    }, 1800);
 
     return () => clearTimeout(timer);
   }, [onComplete]);

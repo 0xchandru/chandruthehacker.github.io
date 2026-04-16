@@ -1,146 +1,234 @@
 import React from "react";
 import styled from "styled-components";
+import { GitHub } from "@mui/icons-material";
+
+const categoryConfig = {
+  defensive: { label: "DEFENSIVE", bg: "rgba(0,136,255,0.85)", text: "#fff", border: "#0088ff" },
+  offensive: { label: "OFFENSIVE", bg: "rgba(255,68,68,0.85)", text: "#fff", border: "#ff4444" },
+  forensics: { label: "FORENSICS", bg: "rgba(255,170,0,0.85)", text: "#1a1a1a", border: "#ffaa00" },
+  automation: { label: "AUTOMATION", bg: "rgba(0,255,136,0.85)", text: "#1a1a1a", border: "#00ff88" },
+};
 
 const Card = styled.div`
-  width: 330px;
-  height: 490px;
-  background-color: ${({ theme }) => theme.card};
-  cursor: pointer;
-  border-radius: 10px;
-  box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.5);
+  background: ${({ theme }) => theme.card};
+  border: 1px solid ${({ theme }) => theme.cardBorder};
+  border-radius: 12px;
   overflow: hidden;
-  padding: 26px 20px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  transition: all 0.5s ease-in-out;
+  width: 340px;
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  border-left: 4px solid ${({ $borderColor }) => $borderColor || "transparent"};
+
   &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 50px 4px rgba(0, 0, 0, 0.6);
+    transform: translateY(-4px);
+    border-color: ${({ $borderColor }) => $borderColor || "#00ff88"};
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
   }
-  @media(max-width: 370px){
+
+  @media (max-width: 400px) {
     width: 100%;
   }
 `;
-const Image = styled.img`
-  width: 100%;
-  height: 180px;
-  background-color: ${({ theme }) => theme.white};
-  border-radius: 10px;
-  box-shadow: 0 0 16px 2px rgba(0, 0, 0, 0.3);
-`;
-const Tags = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 4px;
-`;
-const Tag = styled.div`
-  font-size: 12px;
-  font-weight: 400;
-  color: ${({ theme }) => theme.primary};
-  background-color: ${({ theme }) => theme.primary + 15};
-  padding: 2px 8px;
-  border-radius: 10px;
-`;
-const Details = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  padding: 0px 2px;
-`;
-const Title = styled.div`
-  font-size: 20px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.text_secondary};
+
+const ImageWrapper = styled.div`
+  position: relative;
   overflow: hidden;
-  display: -webkit-box;
-  max-width: 100%;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-const Date = styled.div`
-  font-size: 12px;
-  margin-left: 2px;
-  font-weight: 400;
-  color: ${({ theme }) => theme.text_secondary + 80};
-  @media only screen and (max-width: 768px) {
-    font-size: 10px;
+  height: 188px;
+
+  &:hover img {
+    transform: scale(1.05);
   }
 `;
-const Description = styled.div`
-  font-weight: 400;
-  color: ${({ theme }) => theme.text_secondary + 99};
-  overflow: hidden;
-  margin-top: 8px;
-  display: -webkit-box;
-  max-width: 100%;
-  white-space: pre-line;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
+
+const Img = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  display: block;
 `;
-const Members = styled.div`
+
+const CategoryOverlay = styled.span`
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  background: ${({ $bg }) => $bg};
+  color: ${({ $text }) => $text};
+`;
+
+const Body = styled.div`
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+`;
+
+const Title = styled.h3`
+  font-size: 18px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.text_primary};
+  margin: 0;
+  line-height: 1.3;
+`;
+
+const Subtitle = styled.p`
+  font-size: 13px;
+  color: ${({ theme }) => theme.accent};
+  font-weight: 600;
+  margin: -4px 0 0;
+`;
+
+const Summary = styled.p`
+  font-size: 13px;
+  line-height: 1.6;
+  color: ${({ theme }) => theme.text_secondary};
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+`;
+
+const ToolRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+`;
+
+const ToolChip = styled.span`
+  padding: 3px 9px;
+  background: ${({ theme }) => theme.card_light};
+  border: 1px solid ${({ theme }) => theme.cardBorder};
+  border-radius: 4px;
+  font-size: 11px;
+  color: ${({ theme }) => theme.text_secondary};
+  font-weight: 500;
+`;
+
+const MetricRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+`;
+
+const MetricBadge = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  background: ${({ theme }) => theme.accent}0a;
+  border: 1px solid ${({ theme }) => theme.accent}25;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.accent};
+  font-family: monospace;
+`;
+
+const ActionRow = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 4px;
+`;
+
+const ActionBtn = styled.button`
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
   display: flex;
   align-items: center;
-  padding-left: 10px;
-`;
-const Avatar = styled.img`
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  margin-left: -10px;
-  background-color: ${({ theme }) => theme.white};
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border: 3px solid ${({ theme }) => theme.card};
-`;
+  justify-content: center;
+  gap: 6px;
 
+  ${({ $variant, theme }) =>
+    $variant === "primary"
+      ? `
+      background: ${theme.accent};
+      color: #0a0a0a;
+      &:hover { opacity: 0.85; }
+    `
+      : `
+      background: ${theme.card_light};
+      color: ${theme.text_secondary};
+      border: 1px solid ${theme.cardBorder};
+      &:hover { border-color: ${theme.accent}60; color: ${theme.text_primary}; }
+    `}
+`;
 
 const ProjectCard = ({ project, setOpenModal }) => {
-  function formatDescription(description) {
-  const lines = description.trim().split('\n');
+  const config = categoryConfig[project.category] || categoryConfig.defensive;
 
-  return lines.map((line, index) => {
-    if (line.startsWith("##")) {
-      return <div key={index} style={{ fontWeight: "bold", marginTop: "8px" }}>{line.replace(/^##\s*/, '')}</div>;
+  const handleGithub = (e) => {
+    e.stopPropagation();
+    if (project.github) {
+      window.open(project.github, "_blank", "noopener noreferrer");
     }
-
-    const formattedLine = line
-      .replace(/\*\*(.*?)\*\*/g, "<i>$1</i>");
-
-    return (
-      <div
-        key={index}
-        dangerouslySetInnerHTML={{ __html: formattedLine }}
-        style={{ whiteSpace: "pre-line", fontSize: "14px", lineHeight: "20px" }}
-      />
-    );
-  });
-}
+  };
 
   return (
-    <Card onClick={() => setOpenModal({ state: true, project: project })}>
-      <Image src={project.image} />
-      <Tags>
-        {project.tags?.map((tag, index) => (
-          <Tag>{tag}</Tag>
-        ))}
-      </Tags>
-      <Details>
-        <Title>{project.title}</Title>
-        <Date>{project.date}</Date>
-        <Description>{formatDescription(project.description)}</Description>
-      </Details>
-      <Members>
-        {project.member?.map((member) => (
-          <Avatar src={member.img} />
-        ))}
-      </Members>
+    <Card
+      $borderColor={config.border}
+      onClick={() => setOpenModal({ state: true, project })}
+    >
+      <ImageWrapper>
+        <Img src={project.image} alt={project.title} loading="lazy" />
+        <CategoryOverlay $bg={config.bg} $text={config.text}>
+          {config.label}
+        </CategoryOverlay>
+      </ImageWrapper>
+
+      <Body>
+        <div>
+          <Title>{project.title}</Title>
+          {project.subtitle && <Subtitle>{project.subtitle}</Subtitle>}
+        </div>
+
+        <Summary>{project.summary}</Summary>
+
+        <ToolRow>
+          {project.tags?.slice(0, 5).map((tag, i) => (
+            <ToolChip key={i}>{tag}</ToolChip>
+          ))}
+        </ToolRow>
+
+        {project.metrics && project.metrics.length > 0 && (
+          <MetricRow>
+            {project.metrics.map((m, i) => (
+              <MetricBadge key={i}>
+                {m.value} <span style={{ fontWeight: 400, opacity: 0.75 }}>{m.label}</span>
+              </MetricBadge>
+            ))}
+          </MetricRow>
+        )}
+
+        <ActionRow>
+          {project.github && (
+            <ActionBtn $variant="secondary" onClick={handleGithub}>
+              <GitHub style={{ fontSize: 16 }} />
+              GitHub
+            </ActionBtn>
+          )}
+          <ActionBtn $variant="primary" onClick={() => setOpenModal({ state: true, project })}>
+            Details →
+          </ActionBtn>
+        </ActionRow>
+      </Body>
     </Card>
   );
 };
