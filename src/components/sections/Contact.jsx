@@ -2,336 +2,289 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import emailjs from "@emailjs/browser";
 import { Bio } from "../../data/constants";
-import { GitHub, WhatsApp,Phone as PhoneIcon, Email as GmailIcon,
-  Telegram as TelegramIcon, Instagram as InstagramIcon, LinkedIn as LinkedInIcon,
-  Twitter as TwitterIcon, Facebook as FacebookIcon, 
- } from "@mui/icons-material";
-
+import {
+  GitHub, WhatsApp, Phone as PhoneIcon,
+  Email as GmailIcon, Telegram as TelegramIcon,
+  LinkedIn as LinkedInIcon, Twitter as TwitterIcon,
+} from "@mui/icons-material";
 
 const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 const email = Bio.gmail;
-const subject = "Subject Here";
-const body = "Your message here";
+const subject = "Opportunity for Chandraprakash";
+const body = "Hi Chandraprakash,";
 
 const mobileHref = `mailto:${email}`;
 const desktopHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-const Container = styled.div`
+const Section = styled.section`
+  padding: 80px 24px;
   display: flex;
   justify-content: center;
-  gap: 12px;
-  z-index: 1;
-  align-items: center;
-  @media (max-width: 960px) {
-    padding: 0px;
-  }
 `;
 
-const Wrapper = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
+const Inner = styled.div`
   width: 100%;
-  max-width: 1350px;
-  padding: 0px 0px 80px 0px;
-  gap: 12px;
-  @media (max-width: 960px) {
-    flex-direction: column;
-  }
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
 `;
 
-const Title = styled.div`
-  font-size: 52px;
-  text-align: center;
-  font-weight: 600;
-  margin-top: 20px;
+const SectionTitle = styled.h2`
+  font-size: 36px;
+  font-weight: 800;
   color: ${({ theme }) => theme.text_primary};
-  @media (max-width: 768px) {
-    margin-top: 12px;
-    font-size: 32px;
-  }
+  margin: 0 0 8px;
+  text-align: center;
 `;
 
-const Desc = styled.div`
-  font-size: 18px;
-  text-align: center;
-  max-width: 600px;
-  padding: 0 15px;
+const SectionSubtitle = styled.p`
+  font-size: 16px;
   color: ${({ theme }) => theme.text_secondary};
-  @media (max-width: 768px) {
-    margin-top: 12px;
-    font-size: 16px;
-  }
-`;
-const ContactForm = styled.form`
-  width: 95%;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: ${({ theme }) => theme.card_bg};
-  border: 1px solid rgba(255, 255, 255, 0.125);
-  padding: 32px;
-  border-radius: 12px;
-  box-shadow: rgba(23, 92, 230, 0.1) 0px 4px 24px;
-  margin-top: 28px;
-  gap: 12px;
-`;
-const ContactTitle = styled.div`
-  font-size: 28px;
   text-align: center;
-  margin-bottom: 10px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.text_primary};
+  margin: 0 0 36px;
+  max-width: 480px;
 `;
 
-const ContactInput = styled.input`
-  flex: 1;
-  background-color: transparent;
-  border: 1px solid ${({ theme, $hasError }) => ($hasError ? 'red' : theme.text_secondary + 50)};
-  outline: none;
-  font-size: 18px;
-  color: ${({ theme }) => theme.text_primary};
-  border-radius: 12px;
-  padding: 12px 16px;
-  &:focus {
-    border: 1px solid ${({ theme }) => theme.primary};
-  }
-`;
-
-const ContactInputMessage = styled.textarea`
-  flex: 1;
-  background-color: transparent;
-  border: 1px solid ${({ theme, $hasError }) => ($hasError ? 'red' : theme.text_secondary + 50)};
-  outline: none;
-  font-size: 18px;
-  color: ${({ theme }) => theme.text_primary};
-  border-radius: 12px;
-  padding: 12px 16px;
-  &:focus {
-    border: 1px solid ${({ theme }) => theme.primary};
-  }
-`;
-
-const ContactButton = styled.button`
-  width: 100%;
-  text-decoration: none;
-  background: hsla(271, 100%, 50%, 1);
-  background: linear-gradient(
-    225deg,
-    hsla(271, 100%, 50%, 1) 0%,
-    hsla(294, 100%, 50%, 1) 100%
-  );
-  background: -moz-linear-gradient(
-    225deg,
-    hsla(271, 100%, 50%, 1) 0%,
-    hsla(294, 100%, 50%, 1) 100%
-  );
-  background: -webkit-linear-gradient(
-    225deg,
-    hsla(271, 100%, 50%, 1) 0%,
-    hsla(294, 100%, 50%, 1) 100%
-  );
-  padding: 13px 16px;
-  margin-top: 2px;
-  border-radius: 12px;
-  border: none;
-  color: ${({ theme }) => theme.text_primary};
-  font-size: 18px;
-  font-weight: 600;
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  opacity: ${({ disabled }) => (disabled ? 0.7 : 1)};
-  display: flex;
-  justify-content: center; 
-  align-items: center;
-  gap: 8px; 
-`;
-const ContactIcons = styled.div`
+const QuickLinks = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 12px;
   justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-  padding: 0 15px;
-  @media (max-width: 768px) {
-    gap: 24px;
-  }
-
-  @media (max-width: 480px) {
-    align-items: center;
-    gap: 16px;
-  }
+  margin-bottom: 40px;
+  width: 100%;
 `;
 
-const ContactIcon = styled.a`
+const QuickBtn = styled.a`
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 10px 18px;
-  width: 200px;
-  border: 1px solid ${({ theme }) => theme.primary};
-  border-radius: 12px;
-  background-color: ${({ theme }) => theme.card_light};
-  color: ${({ theme }) => theme.text_primary};
+  gap: 8px;
+  padding: 10px 20px;
+  background: ${({ theme }) => theme.card};
+  border: 1px solid ${({ theme }) => theme.cardBorder};
+  border-radius: 8px;
+  color: ${({ theme }) => theme.text_secondary};
   text-decoration: none;
-  font-size: 16px;
-  transition: 0.5s ease-in-out;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  -webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
-
-  &:hover {
-    transform: scale(1.03);
-    background-color: ${({ theme }) => theme.primary};
-    color: ${({ theme }) => theme.white};
-  }
+  font-size: 14px;
+  font-weight: 600;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 
   svg {
-    font-size: 32px;
+    font-size: 20px;
   }
 
-  @media (max-width: 480px) {
-    font-size: 14px;
-    padding: 12px 16px;
-
-    svg {
-      font-size: 26px;
-    }
-  }
-`;
-
-
-const SocialMediaIcons = styled.div`
-  display: flex;
-  margin-top: 2rem;
-@media(max-width: 400px){
-  width: 100%;
-  justify-content: space-evenly;
-  padding: 0 10px;
-}
-`;
-const SocialMediaIcon = styled.a`
-  display: inline-block;
-  font-size: 1.5rem;
-  margin: 10px 1rem 0;
-  color: ${({ theme }) => theme.text_primary};
-  transition: color 0.2s ease-in-out;
-  -webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
   &:hover {
-    color: ${({ theme }) => theme.primary};
-  }
-   @media (max-width: 500px) {
-    font-size: 24px;
-
-    & > * {
-      font-size: 28px !important;
-    }
-  }
-  @media(max-width: 400px){
-  margin: 0;
+    border-color: ${({ theme }) => theme.accent}50;
+    color: ${({ theme }) => theme.text_primary};
+    transform: translateY(-2px);
   }
 `;
 
-const LoadingSpinner = styled.div`
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  border-top: 4px solid ${({ theme }) => theme.text_primary};
+const SocialRow = styled.div`
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+`;
+
+const SocialIcon = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: ${({ theme }) => theme.card};
+  border: 1px solid ${({ theme }) => theme.cardBorder};
+  color: ${({ theme }) => theme.text_secondary};
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
+
+  svg {
+    font-size: 20px;
+  }
+
+  &:hover {
+    border-color: ${({ theme }) => theme.accent}50;
+    color: ${({ theme }) => theme.accent};
+  }
+`;
+
+const Divider = styled.div`
+  width: 100%;
+  height: 1px;
+  background: ${({ theme }) => theme.cardBorder};
+  margin-bottom: 40px;
+  position: relative;
+
+  &::before {
+    content: "or send a message";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: ${({ theme }) => theme.bg};
+    padding: 0 16px;
+    font-size: 12px;
+    color: ${({ theme }) => theme.text_secondary};
+    white-space: nowrap;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+`;
+
+const Form = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const FormTitle = styled.h3`
+  font-size: 20px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.text_primary};
+  margin: 0 0 4px;
+  text-align: center;
+`;
+
+const Row = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const Input = styled.input`
+  width: 100%;
+  background: ${({ theme }) => theme.card};
+  border: 1px solid ${({ $hasError, theme }) =>
+    $hasError ? "#ff4444" : theme.cardBorder};
+  color: ${({ theme }) => theme.text_primary};
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: ${({ theme }) => theme.text_secondary};
+    opacity: 0.6;
+  }
+
+  &:focus {
+    border-color: ${({ theme }) => theme.accent}60;
+  }
+`;
+
+const Textarea = styled.textarea`
+  width: 100%;
+  background: ${({ theme }) => theme.card};
+  border: 1px solid ${({ $hasError, theme }) =>
+    $hasError ? "#ff4444" : theme.cardBorder};
+  color: ${({ theme }) => theme.text_primary};
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 14px;
+  outline: none;
+  resize: vertical;
+  min-height: 120px;
+  box-sizing: border-box;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: ${({ theme }) => theme.text_secondary};
+    opacity: 0.6;
+  }
+
+  &:focus {
+    border-color: ${({ theme }) => theme.accent}60;
+  }
+`;
+
+const SubmitBtn = styled.button`
+  width: 100%;
+  padding: 13px;
+  background: ${({ theme }) => theme.accent};
+  color: #0a0a0a;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  opacity: ${({ disabled }) => (disabled ? 0.65 : 1)};
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &:hover:not(:disabled) {
+    opacity: 0.88;
+  }
+`;
+
+const Spinner = styled.div`
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  border-top-color: #0a0a0a;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  animation: spin 1s linear infinite;
+  width: 18px;
+  height: 18px;
+  animation: spin 0.8s linear infinite;
 
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    to { transform: rotate(360deg); }
   }
 `;
 
-const FormMessage = styled.p`
+const FormMsg = styled.p`
   text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 12px;
-  color: ${({ type }) => (type === 'error' ? 'red' : 'green')};
+  font-size: 14px;
+  font-weight: 600;
+  color: ${({ $type }) => ($type === "error" ? "#ff6060" : "#00ff88")};
+  margin: 0;
 `;
-
 
 const Contact = () => {
   const form = useRef();
   const [isSending, setIsSending] = useState(false);
-  const [formMessage, setFormMessage] = useState('');
-  const [formMessageType, setFormMessageType] = useState('');
+  const [formMessage, setFormMessage] = useState("");
+  const [formMessageType, setFormMessageType] = useState("");
+  const [errors, setErrors] = useState({ from_email: false, from_name: false, message: false });
 
-  const [validationErrors, setValidationErrors] = useState({
-    from_email: false,
-    from_name: false,
-    message: false,
-  });
-
-  const clearValidationError = (fieldName) => {
-    if (validationErrors[fieldName]) {
-      setValidationErrors((prevErrors) => ({
-        ...prevErrors,
-        [fieldName]: false,
-      }));
-      if (formMessageType === 'error' && formMessage.includes('required fields')) {
-          setFormMessage('');
-          setFormMessageType('');
-      }
+  const clearError = (field) => {
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: false }));
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFormMessage("");
 
-    setFormMessage('');
-    setFormMessageType('');
-
-    let hasError = false;
-    const errors = {
-      from_email: false,
-      from_name: false,
-      message: false,
+    const { from_email, from_name, message } = form.current.elements;
+    const newErrors = {
+      from_email: !from_email.value.trim() || !/\S+@\S+\.\S+/.test(from_email.value),
+      from_name: !from_name.value.trim(),
+      message: !message.value.trim(),
     };
+    setErrors(newErrors);
 
-    const emailInput = form.current.elements.from_email;
-    const nameInput = form.current.elements.from_name;
-    const messageInput = form.current.elements.message;
-
-    if (!nameInput.value.trim()) {
-      errors.from_name = true;
-      hasError = true;
-    }
-    if (!emailInput.value.trim()) {
-      errors.from_email = true;
-      hasError = true;
-    } else if (!/\S+@\S+\.\S+/.test(emailInput.value)) {
-      errors.from_email = true;
-      hasError = true;
-    }
-    if (!messageInput.value.trim()) {
-      errors.message = true;
-      hasError = true;
-    }
-
-    setValidationErrors(errors);
-
-    if (hasError) {
-      setFormMessage('Please fill in all required fields and ensure email is valid.');
-      setFormMessageType('error');
+    if (Object.values(newErrors).some(Boolean)) {
+      setFormMessage("Please fill in all required fields correctly.");
+      setFormMessageType("error");
       return;
     }
 
     setIsSending(true);
-
     try {
       const result = await emailjs.sendForm(
         "service_j8n2w7r",
@@ -340,136 +293,98 @@ const Contact = () => {
         "CPqsd_WoFyuxo09lw"
       );
 
-      console.log('EmailJS Result:', result.text);
-      let res = result.text;
-
-      if (res === 'OK') {
-        setFormMessage('Message Sent Successfully!');
-        setFormMessageType('success');
+      if (result.text === "OK") {
+        setFormMessage("Message sent successfully!");
+        setFormMessageType("success");
         form.current.reset();
-        setValidationErrors({
-          from_email: false,
-          from_name: false,
-          message: false,
-        });
+        setErrors({ from_email: false, from_name: false, message: false });
+        setTimeout(() => setFormMessage(""), 5000);
       } else {
-        setFormMessage('Failed to send. Please try again or use another way of communication.');
-        setFormMessageType('error');
+        throw new Error("Send failed");
       }
-
-      form.current.reset();
-      setValidationErrors({
-        from_email: false,
-        from_name: false,
-        message: false,
-      }, setTimeout(() => {
-          setFormMessage('');
-          setFormMessageType('');
-        }, 5000)
-      );
-    } catch (error) {
-      console.error('EmailJS Error:', error);
-      setFormMessage(`Failed to send message: ${error.text || 'An unexpected error occurred.'}`);
-      setFormMessageType('error');
+    } catch {
+      setFormMessage("Failed to send. Please reach out via LinkedIn or email directly.");
+      setFormMessageType("error");
     } finally {
       setIsSending(false);
     }
   };
 
   return (
-    <Container>
-      <Wrapper>
-        <Title>Contact</Title>
-        <Desc>
-          Feel free to reach out to me for any questions or opportunities!
-        </Desc>
+    <Section id="Contact">
+      <Inner>
+        <SectionTitle>Get In Touch</SectionTitle>
+        <SectionSubtitle>
+          Open to SOC Analyst and security operations roles. Feel free to reach out.
+        </SectionSubtitle>
 
-
-        <SocialMediaIcons>
-        <SocialMediaIcon href={`${Bio.github}`} target="_blank" aria-label="Gmail">
-          <GitHub style={{fontSize: "35px"}} />
-        </SocialMediaIcon>
-        <SocialMediaIcon href={Bio.whatsapp} target="_blank" aria-label="Whatsapp">
-          <WhatsApp style={{fontSize: "35px"}} />
-        </SocialMediaIcon>
-        <SocialMediaIcon href={Bio.facebook} target="_blank" aria-label="Facebook">
-          <FacebookIcon style={{fontSize: "35px"}}/>
-        </SocialMediaIcon>
-        <SocialMediaIcon href={Bio.insta} target="_blank" aria-label="Instagram">
-          <InstagramIcon style={{fontSize: "35px"}}/>
-        </SocialMediaIcon>
-        <SocialMediaIcon href={Bio.telegram} target="_blank" aria-label="Telegram">
-          <TelegramIcon style={{fontSize: "35px"}}/>
-        </SocialMediaIcon>
-        <SocialMediaIcon href={Bio.twitter} target="_blank" aria-label="Twitter">
-          <TwitterIcon style={{fontSize: "35px"}}/>
-        </SocialMediaIcon>
-        </SocialMediaIcons>
-                <ContactIcons>
-          <ContactIcon
+        <QuickLinks>
+          <QuickBtn
             href={isMobile ? mobileHref : desktopHref}
             target="_blank"
-            aria-label="Gmail"
+            rel="noopener noreferrer"
           >
-            <GmailIcon />
-            Let’s Connect
-          </ContactIcon>
+            <GmailIcon /> Email Me
+          </QuickBtn>
+          <QuickBtn href={Bio.linkedin} target="_blank" rel="noopener noreferrer">
+            <LinkedInIcon /> LinkedIn
+          </QuickBtn>
+          <QuickBtn href={`tel:${Bio.phone}`}>
+            <PhoneIcon /> Call
+          </QuickBtn>
+        </QuickLinks>
 
-          <ContactIcon href={Bio.linkedin} target="_blank" aria-label="LinkedIn">
-            <LinkedInIcon />
-            Connect Now
-          </ContactIcon>
+        <SocialRow>
+          <SocialIcon href={Bio.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <GitHub />
+          </SocialIcon>
+          <SocialIcon href={Bio.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <TwitterIcon />
+          </SocialIcon>
+          <SocialIcon href={Bio.telegram} target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+            <TelegramIcon />
+          </SocialIcon>
+          <SocialIcon href={Bio.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <WhatsApp />
+          </SocialIcon>
+        </SocialRow>
 
-          <ContactIcon href={`tel:${Bio.phone}`} aria-label="Call">
-            <PhoneIcon />
-            Quick Call
-          </ContactIcon>
-        </ContactIcons>
+        <Divider />
 
-        <ContactForm onSubmit={handleSubmit} ref={form}>
-          <ContactTitle>Email Me 🚀</ContactTitle>
+        <Form onSubmit={handleSubmit} ref={form}>
+          <FormTitle>Send a Message</FormTitle>
 
-          {formMessage && (
-            <FormMessage type={formMessageType}>{formMessage}</FormMessage>
-          )}
+          {formMessage && <FormMsg $type={formMessageType}>{formMessage}</FormMsg>}
 
-          <ContactInput
-            placeholder="Your Email"
-            name="from_email"
-            type="email"
-            $hasError={validationErrors.from_email}
-            onFocus={() => clearValidationError('from_email')} 
-            onChange={() => clearValidationError('from_email')}
-          />
-          <ContactInput
-            placeholder="Your Name"
-            name="from_name"
-            $hasError={validationErrors.from_name}
-            onFocus={() => clearValidationError('from_name')} 
-            onChange={() => clearValidationError('from_name')}
-          />
-          <ContactInput
-            placeholder="Subject"
-            name="subject"
-          />
-          <ContactInputMessage
-            placeholder="Message"
+          <Row>
+            <Input
+              placeholder="Your Name *"
+              name="from_name"
+              $hasError={errors.from_name}
+              onChange={() => clearError("from_name")}
+            />
+            <Input
+              placeholder="Your Email *"
+              name="from_email"
+              type="email"
+              $hasError={errors.from_email}
+              onChange={() => clearError("from_email")}
+            />
+          </Row>
+          <Input placeholder="Subject" name="subject" />
+          <Textarea
+            placeholder="Your message *"
             name="message"
-            rows={4}
-            $hasError={validationErrors.message}
-            onFocus={() => clearValidationError('message')}
-            onChange={() => clearValidationError('message')}
+            rows={5}
+            $hasError={errors.message}
+            onChange={() => clearError("message")}
           />
-          
-          <ContactButton 
-            type="submit" 
-            disabled={isSending}
-          >
-            {isSending ? <LoadingSpinner /> : "Send"}
-          </ContactButton>
-        </ContactForm>
-      </Wrapper>
-    </Container>
+          <SubmitBtn type="submit" disabled={isSending}>
+            {isSending ? <Spinner /> : "Send Message"}
+          </SubmitBtn>
+        </Form>
+      </Inner>
+    </Section>
   );
 };
 

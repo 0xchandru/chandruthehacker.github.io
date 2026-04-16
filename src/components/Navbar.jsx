@@ -49,7 +49,7 @@ const NavItems = styled.ul`
   margin: 0;
   padding: 0;
 
-  @media (max-width: 800px) {
+  @media (max-width: 860px) {
     display: none;
   }
 `;
@@ -85,6 +85,10 @@ const ResumeBtn = styled.a`
   &:hover {
     background: ${({ theme }) => theme.accent}18;
   }
+
+  @media (max-width: 860px) {
+    display: none;
+  }
 `;
 
 const Right = styled.div`
@@ -101,7 +105,7 @@ const MobileIcon = styled.button`
   cursor: pointer;
   padding: 4px;
 
-  @media (max-width: 800px) {
+  @media (max-width: 860px) {
     display: flex;
     align-items: center;
   }
@@ -116,11 +120,11 @@ const MobileMenu = styled.div`
   background: ${({ theme }) => theme.bg};
   display: flex;
   flex-direction: column;
-  padding: 32px 24px;
-  gap: 8px;
+  padding: 32px 28px;
   z-index: 99;
   transform: ${({ $isOpen }) => ($isOpen ? "translateX(0)" : "translateX(100%)")};
   transition: transform 0.3s ease;
+  overflow-y: auto;
 `;
 
 const MobileNavLink = styled.a`
@@ -128,11 +132,32 @@ const MobileNavLink = styled.a`
   font-size: 20px;
   font-weight: 600;
   text-decoration: none;
-  padding: 12px 0;
+  padding: 16px 0;
   border-bottom: 1px solid ${({ theme }) => theme.cardBorder};
 
   &:hover {
     color: ${({ theme }) => theme.accent};
+  }
+`;
+
+const MobileResumeBtn = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 22px;
+  background: transparent;
+  border: 1.5px solid ${({ theme }) => theme.accent};
+  color: ${({ theme }) => theme.accent};
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  margin-top: 28px;
+  align-self: flex-start;
+
+  &:hover {
+    background: ${({ theme }) => theme.accent}18;
   }
 `;
 
@@ -159,6 +184,7 @@ const Navbar = () => {
     { label: "About", id: "About" },
     { label: "Skills", id: "Skills" },
     { label: "Education", id: "Education" },
+    { label: "Experience", id: "Exposure" },
     { label: "Projects", id: "Projects" },
     { label: "Certifications", id: "Certificates" },
   ];
@@ -215,14 +241,13 @@ const Navbar = () => {
             {link.label}
           </MobileNavLink>
         ))}
-        <ResumeBtn
+        <MobileResumeBtn
           href={Bio.resume}
           target="_blank"
           rel="noopener noreferrer"
-          style={{ marginTop: "16px", width: "fit-content" }}
         >
           Download Resume ↗
-        </ResumeBtn>
+        </MobileResumeBtn>
       </MobileMenu>
     </Nav>
   );

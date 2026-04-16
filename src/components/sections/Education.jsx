@@ -36,18 +36,19 @@ const Card = styled(motion.div)`
   display: flex;
   gap: 28px;
   align-items: flex-start;
-  max-width: 720px;
+  max-width: 680px;
   transition: border-color 0.25s ease, transform 0.25s ease;
 
   &:hover {
-    border-color: ${({ theme }) => theme.accent}40;
+    border-color: ${({ theme }) => theme.accent}30;
     transform: translateY(-3px);
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 560px) {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding: 24px;
   }
 `;
 
@@ -71,10 +72,6 @@ const Logo = styled.img`
   padding: 8px;
 `;
 
-const LogoFallback = styled.div`
-  font-size: 28px;
-`;
-
 const Info = styled.div`
   flex: 1;
 `;
@@ -83,51 +80,66 @@ const Degree = styled.h3`
   font-size: 20px;
   font-weight: 700;
   color: ${({ theme }) => theme.text_primary};
-  margin-bottom: 4px;
+  margin: 0 0 4px;
 `;
 
 const Institution = styled.p`
   font-size: 15px;
   color: ${({ theme }) => theme.accent};
   font-weight: 600;
-  margin-bottom: 4px;
+  margin: 0 0 4px;
 `;
 
 const Period = styled.p`
   font-size: 13px;
   color: ${({ theme }) => theme.text_secondary};
-  margin-bottom: 20px;
   font-family: monospace;
+  margin: 0 0 20px;
 `;
 
-const CourseLabel = styled.p`
-  font-size: 13px;
-  font-weight: 600;
+const HighlightsLabel = styled.p`
+  font-size: 12px;
+  font-weight: 700;
   color: ${({ theme }) => theme.text_secondary};
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 `;
 
-const ChipRow = styled.div`
+const HighlightList = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  gap: 6px;
 
-  @media (max-width: 600px) {
-    justify-content: center;
+  @media (max-width: 560px) {
+    align-items: center;
   }
 `;
 
-const Chip = styled.span`
-  padding: 5px 12px;
-  background: ${({ theme }) => theme.accent}10;
-  border: 1px solid ${({ theme }) => theme.accent}22;
-  border-radius: 20px;
-  font-size: 12px;
+const HighlightItem = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
   color: ${({ theme }) => theme.text_secondary};
-  font-weight: 500;
+  line-height: 1.5;
+
+  &::before {
+    content: "▸";
+    color: ${({ theme }) => theme.accent};
+    font-size: 11px;
+    flex-shrink: 0;
+  }
 `;
+
+const keyHighlights = [
+  "Cryptography & Network Security",
+  "Operating Systems & Linux Administration",
+  "Information Security & Database Management",
+];
 
 const Education = () => {
   return (
@@ -149,7 +161,7 @@ const Education = () => {
             {education.img ? (
               <Logo src={education.img} alt={education.institution} />
             ) : (
-              <LogoFallback>🎓</LogoFallback>
+              <span style={{ fontSize: 28 }}>🎓</span>
             )}
           </LogoWrapper>
 
@@ -157,12 +169,12 @@ const Education = () => {
             <Degree>{education.degree}</Degree>
             <Institution>{education.institution}</Institution>
             <Period>{education.period}</Period>
-            <CourseLabel>Relevant Coursework</CourseLabel>
-            <ChipRow>
-              {education.relevantCoursework.map((course, i) => (
-                <Chip key={i}>{course}</Chip>
+            <HighlightsLabel>Key Areas</HighlightsLabel>
+            <HighlightList>
+              {keyHighlights.map((item, i) => (
+                <HighlightItem key={i}>{item}</HighlightItem>
               ))}
-            </ChipRow>
+            </HighlightList>
           </Info>
         </Card>
       </Inner>

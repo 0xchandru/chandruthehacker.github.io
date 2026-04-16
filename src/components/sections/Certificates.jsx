@@ -9,7 +9,7 @@ const Section = styled.section`
   padding: 80px 24px;
   display: flex;
   justify-content: center;
-  background: ${({ theme }) => theme.bgLight}20;
+  background: ${({ theme }) => theme.bgLight}10;
 `;
 
 const Inner = styled.div`
@@ -31,11 +31,18 @@ const SectionSubtitle = styled(motion.p)`
   max-width: 600px;
 `;
 
-const Stack = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: 800px;
+const Grid = styled(motion.div)`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Certificates = () => {
@@ -53,13 +60,13 @@ const Certificates = () => {
           Industry-recognized credentials in threat detection, log analysis, and SOC operations.
         </SectionSubtitle>
 
-        <Stack variants={staggerContainer}>
+        <Grid variants={staggerContainer}>
           {certificates.map((cert) => (
             <motion.div key={cert.id} variants={fadeInUp}>
               <CertificateCard certificate={cert} />
             </motion.div>
           ))}
-        </Stack>
+        </Grid>
       </Inner>
     </Section>
   );

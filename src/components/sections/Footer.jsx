@@ -48,6 +48,7 @@ const Copyright = styled.p`
   color: ${({ theme }) => theme.text_secondary};
   text-align: center;
   opacity: 0.6;
+  margin: 0;
 `;
 
 const scrollTo = (id) => {
@@ -64,6 +65,7 @@ const Footer = () => {
             { label: "About", id: "About" },
             { label: "Skills", id: "Skills" },
             { label: "Education", id: "Education" },
+            { label: "Experience", id: "Exposure" },
             { label: "Projects", id: "Projects" },
             { label: "Certifications", id: "Certificates" },
             { label: "Contact", id: "Contact" },

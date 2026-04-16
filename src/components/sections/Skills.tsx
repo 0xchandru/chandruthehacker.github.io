@@ -7,6 +7,7 @@ const Section = styled.section`
   padding: 80px 24px;
   display: flex;
   justify-content: center;
+  background: ${({ theme }: any) => theme.bgLight}10;
 `;
 
 const Inner = styled.div`
@@ -17,77 +18,82 @@ const Inner = styled.div`
 const SectionTitle = styled(motion.h2)`
   font-size: 36px;
   font-weight: 800;
-  color: ${({ theme }) => theme.text_primary};
+  color: ${({ theme }: any) => theme.text_primary};
   margin-bottom: 8px;
 `;
 
 const SectionSubtitle = styled(motion.p)`
   font-size: 16px;
-  color: ${({ theme }) => theme.text_secondary};
+  color: ${({ theme }: any) => theme.text_secondary};
   margin-bottom: 40px;
 `;
 
 const SkillsGrid = styled(motion.div)`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const SkillCard = styled(motion.div)`
-  background: ${({ theme }) => theme.card};
-  border: 1px solid ${({ theme }) => theme.cardBorder};
+  background: ${({ theme }: any) => theme.card};
+  border: 1px solid ${({ theme }: any) => theme.cardBorder};
   border-radius: 12px;
-  padding: 24px;
-  width: calc(50% - 10px);
+  padding: 22px;
   transition: border-color 0.25s ease, transform 0.25s ease;
 
   &:hover {
-    border-color: ${({ theme }) => theme.accent}30;
+    border-color: ${({ theme }: any) => theme.accent}30;
     transform: translateY(-3px);
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
   }
 `;
 
 const CardTitle = styled.div`
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
-  color: ${({ theme }) => theme.text_primary};
-  margin-bottom: 16px;
+  color: ${({ theme }: any) => theme.accent};
+  margin-bottom: 14px;
   padding-bottom: 10px;
-  border-bottom: 1px solid ${({ theme }) => theme.cardBorder};
+  border-bottom: 1px solid ${({ theme }: any) => theme.cardBorder};
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 `;
 
 const SkillList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
 `;
 
 const SkillChip = styled.div`
   display: flex;
   align-items: center;
-  gap: 7px;
-  padding: 7px 13px;
-  background: ${({ theme }) => theme.card_light};
-  border: 1px solid ${({ theme }) => theme.cardBorder};
+  gap: 6px;
+  padding: 6px 11px;
+  background: ${({ theme }: any) => theme.card_light};
+  border: 1px solid ${({ theme }: any) => theme.cardBorder};
   border-radius: 6px;
-  font-size: 13px;
-  color: ${({ theme }) => theme.text_secondary};
+  font-size: 12px;
+  color: ${({ theme }: any) => theme.text_secondary};
   font-weight: 500;
   transition: border-color 0.2s ease, color 0.2s ease;
 
   &:hover {
-    border-color: ${({ theme }) => theme.accent}40;
-    color: ${({ theme }) => theme.text_primary};
+    border-color: ${({ theme }: any) => theme.accent}40;
+    color: ${({ theme }: any) => theme.text_primary};
   }
 
   svg {
     flex-shrink: 0;
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
   }
 `;
 
@@ -103,7 +109,7 @@ const Skills = () => {
       >
         <SectionTitle variants={fadeInUp}>Skills</SectionTitle>
         <SectionSubtitle variants={fadeInUp}>
-          Hands-on tools and techniques from 3+ years of lab work, projects, and certifications.
+          Hands-on tools and techniques from lab work, projects, and certifications.
         </SectionSubtitle>
 
         <SkillsGrid variants={staggerContainer}>

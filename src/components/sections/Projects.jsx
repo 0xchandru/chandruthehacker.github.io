@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "../../data/constants";
 import ProjectCard from "../cards/ProjectCard";
 import { staggerContainer, fadeInUp } from "../../utils/motion";
@@ -57,7 +57,7 @@ const FilterBtn = styled.button`
   }
 `;
 
-const CardGrid = styled(motion.div)`
+const CardGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
@@ -69,6 +69,12 @@ const filters = [
   { label: "Forensics", value: "forensics" },
   { label: "Automation", value: "automation" },
 ];
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  exit: { opacity: 0, y: -12, transition: { duration: 0.2 } },
+};
 
 const Projects = ({ openModal, setOpenModal }) => {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -104,16 +110,25 @@ const Projects = ({ openModal, setOpenModal }) => {
           ))}
         </FilterRow>
 
-        <CardGrid variants={staggerContainer}>
-          {filtered.map((project) => (
-            <motion.div key={project.id} variants={fadeInUp}>
-              <ProjectCard
-                project={project}
-                openModal={openModal}
-                setOpenModal={setOpenModal}
-              />
-            </motion.div>
-          ))}
+        <CardGrid>
+          <AnimatePresence mode="popLayout">
+            {filtered.map((project) => (
+              <motion.div
+                key={project.id}
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                layout
+              >
+                <ProjectCard
+                  project={project}
+                  openModal={openModal}
+                  setOpenModal={setOpenModal}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </CardGrid>
       </Inner>
     </Section>

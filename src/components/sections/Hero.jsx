@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Bio, stats } from "../../data/constants";
 import Typewriter from "typewriter-effect";
 import HeroImg from "../../assets/profile/Hero.webp";
@@ -207,33 +207,23 @@ const Right = styled(motion.div)`
   flex-shrink: 0;
 `;
 
+const gradientSpin = keyframes`
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+`;
+
 const GradientBorderWrapper = styled.div`
-  position: relative;
-  display: inline-block;
+  padding: 4px;
   border-radius: 50%;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    z-index: -1;
-    background: linear-gradient(
-      45deg,
-      ${({ theme }) => theme.accent},
-      ${({ theme }) => theme.primary},
-      ${({ theme }) => theme.accent}
-    );
-    background-size: 300%;
-    border-radius: 50%;
-    animation: gradientBorder 6s linear infinite;
-    filter: blur(5px);
-  }
-
-  @keyframes gradientBorder {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+  background: linear-gradient(
+    135deg,
+    ${({ theme }) => theme.accent},
+    ${({ theme }) => theme.primary},
+    ${({ theme }) => theme.accent}
+  );
+  background-size: 300% 300%;
+  animation: ${gradientSpin} 5s ease infinite;
 `;
 
 const ProfileImg = styled.img`
@@ -241,8 +231,6 @@ const ProfileImg = styled.img`
   width: 380px;
   height: 380px;
   object-fit: cover;
-  position: relative;
-  z-index: 1;
   display: block;
 
   @media (max-width: 768px) {
