@@ -59,7 +59,7 @@ const Entry = styled(motion.div)`
   &::before {
     content: '';
     position: absolute;
-    left: -21px;
+    left: -28px;
     top: 5px;
     width: 12px;
     height: 12px;
