@@ -8,7 +8,6 @@ import {
 } from 'lucide-react';
 
 import collegeImg from "../assets/education/gtn.png";
-import internImg from "../assets/icons/internship.png";
 import honeypotImg from "../assets/projects/honeypot.webp";
 import logParserImg from "../assets/projects/log-parser.webp";
 import phishingDetectorImg from "../assets/projects/phishing-detector.webp";
@@ -37,7 +36,7 @@ export const Bio = {
     "https://drive.google.com/file/d/1uvc_fGkEsu40CfaoMggKwQcCT0Ar4rPX/view?usp=sharing",
   gmail: "cyberchandru87@gmail.com",
   phone: "+919786475035",
-  linkedin: "https://www.linkedin.com/in/chandraprakash87/",
+  linkedin: "https://www.linkedin.com/in/chandraprakash-soc/",
   twitter: "https://x.com/cyberchandru",
   telegram: "https://t.me/chandruthehacker",
   insta: "https://www.instagram.com/cyberchandru",
@@ -104,9 +103,9 @@ export const skills = [
       { name: "Wireshark", icon: <Activity color="#00e676" /> },
       { name: "TCP/IP Analysis", icon: <Cable color="#00acc1" /> },
       { name: "Firewall Logs", icon: <BrickWallFire color="#ef6c00" /> },
+      { name: "NetFlow", icon: <ChevronsLeftRightEllipsis color="#c2185b" /> },
       { name: "VPN Monitoring", icon: <GlobeLock color="#7c4dff" /> },
-      { name: "Nmap", icon: <Eye color="#26a69a" /> },
-      { name: "NetFlow", icon: <ChevronsLeftRightEllipsis color="#c2185b" /> }
+      { name: "Nmap", icon: <Eye color="#26a69a" /> }
     ]
   },
   {
@@ -115,10 +114,10 @@ export const skills = [
       { name: "Sigma Rules", icon: <Sigma color="#3f51b5" /> },
       { name: "YARA Rules", icon: <Code color="#ff9800" /> },
       { name: "SIEM Querying", icon: <FileSearch2 color="#2196f3" /> },
+      { name: "OSINT", icon: <Globe color="#2196f3" /> },
       { name: "Log Analysis", icon: <FileText color="#ff5722" /> },
-      { name: "Regex", icon: <Regex color="#ff7043" /> },
-      { name: "OSINT", icon: <Globe color="#2196f3" /> }
-    ]
+      { name: "Regex", icon: <Regex color="#ff7043" /> }
+    ],
   },
   {
     title: "Automation & Scripting",
@@ -428,19 +427,7 @@ export const education = {
 };
 
 export const practicalExposure = [
-  {
-    category: "SIMULATION",
-    title: "Cybersecurity Intern",
-    platform: "Elevate Labs",
-    description:
-      "Worked on real-world SOC tasks including log analysis, alert triage, and threat detection using Splunk and ELK. " +
-      "Built a Python log parser to identify brute-force attacks, reducing false positives by 30%. " +
-      "Participated in simulated phishing campaigns and incident response drills.",
-    tools: ["Splunk", "ELK Stack", "Python", "Incident Response", "Phishing Analysis"],
-    date: "June 2025 – July 2025",
-    proof: "https://drive.google.com/file/d/1PxM19ue3-0FkXZVccJtcrmlvNPv-u2Ow/view?usp=sharing",
-    img: internImg,
-  },
+
   {
     category: "LAB",
     title: "SOC Level 1 Analyst Path",
@@ -463,16 +450,5 @@ export const practicalExposure = [
     tools: ["Wireshark", "VirusTotal", "AlienVault OTX", "Volatility"],
     date: "Ongoing",
     proof: null,
-  },
-  {
-    category: "COMPETITION",
-    title: "National Level CTF",
-    platform: "Top 15% Finish",
-    description:
-      "Solved 12 challenges across forensics, crypto, and web exploitation categories. " +
-      "Performed memory dump analysis with Volatility. Extracted flags from packet captures using custom Wireshark filters.",
-    tools: ["Volatility", "Burp Suite", "Wireshark", "CyberChef"],
-    date: "Sep 2023",
-    proof: null,
-  },
+  }
 ];

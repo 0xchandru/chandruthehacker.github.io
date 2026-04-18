@@ -224,6 +224,7 @@ const GradientBorderWrapper = styled.div`
   );
   background-size: 300% 300%;
   animation: ${gradientSpin} 5s ease infinite;
+  box-shadow: 0 18px 40px ${({ theme }) => theme.accent}33, 0 8px 18px rgba(0, 0, 0, 0.28);
 `;
 
 const ProfileImg = styled.img`
