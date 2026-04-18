@@ -275,7 +275,10 @@ const categoryConfig = {
   defensive: { label: "DEFENSIVE", bg: "rgba(0,136,255,0.85)", text: "#fff" },
   offensive: { label: "OFFENSIVE", bg: "rgba(255,68,68,0.85)", text: "#fff" },
   forensics: { label: "FORENSICS", bg: "rgba(255,170,0,0.85)", text: "#1a1a1a" },
-  automation: { label: "AUTOMATION", bg: "rgba(0,255,136,0.85)", text: "#1a1a1a" },
+  tools: { label: "TOOLS", bg: "rgba(0,255,136,0.85)", text: "#062b18" },
+  labs: { label: "LABS", bg: "rgba(170,120,255,0.85)", text: "#fff" },
+  ai: { label: "AI", bg: "rgba(255,82,154,0.85)", text: "#fff" },
+  other: { label: "OTHER", bg: "rgba(153,153,153,0.85)", text: "#fff" },
 };
 
 const ProjectDetails = ({ openModal, setOpenModal }) => {
@@ -290,7 +293,12 @@ const ProjectDetails = ({ openModal, setOpenModal }) => {
 
   if (!project) return null;
 
-  const config = categoryConfig[project.category] || categoryConfig.defensive;
+  const categories =
+    Array.isArray(project.categories) && project.categories.length > 0
+      ? project.categories
+      : project.category
+      ? [project.category]
+      : ["other"];
   const detail = project.detail || {};
 
   return (
@@ -307,9 +315,14 @@ const ProjectDetails = ({ openModal, setOpenModal }) => {
           <TitleRow>
             <ProjectTitle>{project.title}</ProjectTitle>
             <BadgeRow>
-              <CategoryBadge $bg={config.bg} $text={config.text}>
-                {config.label}
-              </CategoryBadge>
+              {categories.map((category) => {
+                const config = categoryConfig[category] || categoryConfig.other;
+                return (
+                  <CategoryBadge key={category} $bg={config.bg} $text={config.text}>
+                    {config.label}
+                  </CategoryBadge>
+                );
+              })}
               {project.tags?.map((tag, i) => (
                 <TagChip key={i}>{tag}</TagChip>
               ))}

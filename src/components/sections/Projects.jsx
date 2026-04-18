@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import { projects } from "../../data/constants";
+import { projects, projectCategories } from "../../data/constants";
 import ProjectCard from "../cards/ProjectCard";
 import { staggerContainer, fadeInUp } from "../../utils/motion";
 
@@ -63,12 +63,10 @@ const CardGrid = styled.div`
   gap: 24px;
 `;
 
-const filters = [
-  { label: "All", value: "all" },
-  { label: "Defensive", value: "defensive" },
-  { label: "Forensics", value: "forensics" },
-  { label: "Automation", value: "automation" },
-];
+const filters = projectCategories.map((category) => ({
+  label: category,
+  value: category.toLowerCase(),
+}));
 
 const cardVariants = {
   hidden: { opacity: 0, y: 24 },
@@ -79,10 +77,22 @@ const cardVariants = {
 const Projects = ({ openModal, setOpenModal }) => {
   const [activeFilter, setActiveFilter] = useState("all");
 
+  const getProjectCategories = (project) => {
+    if (Array.isArray(project.categories) && project.categories.length > 0) {
+      return project.categories;
+    }
+
+    if (project.category) {
+      return [project.category];
+    }
+
+    return ["other"];
+  };
+
   const filtered =
     activeFilter === "all"
       ? projects
-      : projects.filter((p) => p.category === activeFilter);
+      : projects.filter((p) => getProjectCategories(p).includes(activeFilter));
 
   return (
     <Section id="Projects">

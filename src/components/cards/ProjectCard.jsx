@@ -6,7 +6,10 @@ const categoryConfig = {
   defensive: { label: "DEFENSIVE", bg: "rgba(0,136,255,0.85)", text: "#fff", border: "#0088ff" },
   offensive: { label: "OFFENSIVE", bg: "rgba(255,68,68,0.85)", text: "#fff", border: "#ff4444" },
   forensics: { label: "FORENSICS", bg: "rgba(255,170,0,0.85)", text: "#1a1a1a", border: "#ffaa00" },
-  automation: { label: "AUTOMATION", bg: "rgba(0,255,136,0.85)", text: "#1a1a1a", border: "#00ff88" },
+  tools: { label: "TOOLS", bg: "rgba(0,255,136,0.85)", text: "#062b18", border: "#00ff88" },
+  labs: { label: "LABS", bg: "rgba(170,120,255,0.85)", text: "#fff", border: "#aa78ff" },
+  ai: { label: "AI", bg: "rgba(255,82,154,0.85)", text: "#fff", border: "#ff529a" },
+  other: { label: "OTHER", bg: "rgba(153,153,153,0.85)", text: "#fff", border: "#999999" },
 };
 
 const Card = styled.div`
@@ -51,18 +54,32 @@ const Img = styled.img`
 `;
 
 const CategoryOverlay = styled.span`
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 4px 12px;
+  min-height: 24px;
   border-radius: 6px;
   font-size: 11px;
   font-weight: 700;
+  line-height: 1;
   letter-spacing: 1px;
   text-transform: uppercase;
+  white-space: nowrap;
   backdrop-filter: blur(8px);
   background: ${({ $bg }) => $bg};
   color: ${({ $text }) => $text};
+`;
+
+const CategoryOverlayRow = styled.div`
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
 `;
 
 const Body = styled.div`
@@ -172,7 +189,15 @@ const ActionBtn = styled.button`
 `;
 
 const ProjectCard = ({ project, setOpenModal }) => {
-  const config = categoryConfig[project.category] || categoryConfig.defensive;
+  const categories =
+    Array.isArray(project.categories) && project.categories.length > 0
+      ? project.categories
+      : project.category
+      ? [project.category]
+      : ["other"];
+
+  const primaryCategory = categories[0];
+  const config = categoryConfig[primaryCategory] || categoryConfig.other;
 
   const handleGithub = (e) => {
     e.stopPropagation();
@@ -188,9 +213,16 @@ const ProjectCard = ({ project, setOpenModal }) => {
     >
       <ImageWrapper>
         <Img src={project.image} alt={project.title} loading="lazy" />
-        <CategoryOverlay $bg={config.bg} $text={config.text}>
-          {config.label}
-        </CategoryOverlay>
+        <CategoryOverlayRow>
+          {categories.map((category) => {
+            const categoryMeta = categoryConfig[category] || categoryConfig.other;
+            return (
+              <CategoryOverlay key={category} $bg={categoryMeta.bg} $text={categoryMeta.text}>
+                {categoryMeta.label}
+              </CategoryOverlay>
+            );
+          })}
+        </CategoryOverlayRow>
       </ImageWrapper>
 
       <Body>

@@ -143,13 +143,24 @@ export const skills = [
   }
 ];
 
+export const projectCategories = [
+  "All",
+  "Defensive",
+  "Offensive",
+  "Forensics",
+  "Tools",
+  "Labs",
+  "AI",
+  "Other",
+];
+
 export const projects = [
   {
     id: 0,
     title: "SenSIEM",
     subtitle: "Open-Source SIEM & Alerting Platform",
     date: "2025",
-    category: "defensive",
+    categories: ["defensive", "tools"],
     summary:
       "Built a lightweight open-source SIEM with FastAPI and Next.js. Real-time log ingestion, 35+ detection rules, Splunk-style search, and multi-channel alerting via Email, Slack, and Telegram.",
     image: sensiemImg,
@@ -193,7 +204,7 @@ export const projects = [
     title: "AI Phishing Email Detector",
     subtitle: "NLP-powered Email Threat Classification",
     date: "2025",
-    category: "forensics",
+    categories: ["forensics", "ai"],
     summary:
       "Python tool using Google Generative AI to classify phishing emails. Analyzes headers, subject, and body for malicious indicators. 90% accuracy on 100+ real phishing samples, 20% fewer false positives vs keyword-only filters.",
     image: phishingDetectorImg,
@@ -235,7 +246,7 @@ export const projects = [
     title: "Log Analysis Tool",
     subtitle: "CLI Threat Detection from Raw Log Files",
     date: "2025",
-    category: "automation",
+    categories: ["tools", "defensive"],
     summary:
       "CLI tool that auto-detects Apache, Nginx, SSH, and syslog formats. Identifies brute-force, geo-anomalies, and suspicious sudo activity. Detected 90% of attacks vs 70% manual — 60% faster analysis.",
     image: logParserImg,
@@ -278,7 +289,7 @@ export const projects = [
     title: "HoneyAuth",
     subtitle: "Decoy Login Honeypot for Attacker Intelligence",
     date: "2025",
-    category: "defensive",
+    categories: ["defensive", "labs"],
     summary:
       "Deployed a Flask-based decoy login portal in a VM. Captured 200+ malicious attempts over 2 weeks. Mapped threats from 12 countries, identified 3 distinct attack patterns including credential stuffing.",
     image: honeypotImg,
@@ -326,7 +337,7 @@ export const projects = [
     title: "Password Strength Checker",
     subtitle: "Real-time Credential Security Analyzer",
     date: "2025",
-    category: "automation",
+    categories: ["tools", "other"],
     summary:
       "Browser-based password analyzer with real-time entropy scoring and actionable feedback. Detects weak patterns, dictionary words, and character class gaps. 100% accuracy identifying weak passwords across 100+ samples.",
     image: passwordCheckerImg,
