@@ -169,8 +169,8 @@ export const projects = [
       { value: "35+", label: "Detection Rules" },
       { value: "3", label: "Alert Channels" },
     ],
-    github: "https://github.com/chandruthehacker/SenSIEM",
-    blog: "https://chandruthehacker.github.io/portfolio-website-old/projects/all-projects/sensiem/sensiem.html",
+    github: "https://github.com/0xchandru/SenSIEM",
+    blog: "https://0xchandru.github.io/portfolio-website-old/projects/all-projects/sensiem/sensiem.html",
     detail: {
       tldr:
         "Built SenSIEM — a self-hosted SIEM platform with real-time log ingestion, 35+ pre-built detection rules, a Splunk-inspired search page, and alert dashboards. Processes Apache, SSH, syslog, and Windows Event Log sources.",
@@ -213,8 +213,8 @@ export const projects = [
       { value: "90%", label: "Detection Accuracy" },
       { value: "20%", label: "False Positive Reduction" },
     ],
-    github: "https://github.com/chandruthehacker/phishing-email-detector",
-    blog: "https://chandruthehacker.github.io/portfolio-website-old/projects/all-projects/phising-email-detector/phising-email-detector.html",
+    github: "https://github.com/0xchandru/phishing-email-detector",
+    blog: "https://0xchandru.github.io/portfolio-website-old/projects/all-projects/phising-email-detector/phising-email-detector.html",
     detail: {
       tldr:
         "Built a Python tool that extracts email content via Gmail API / IMAP, submits it to Google Generative AI for phishing classification, and flags suspicious patterns. Achieved 90% accuracy with 20% fewer false positives compared to keyword-only approaches.",
@@ -255,8 +255,8 @@ export const projects = [
       { value: "60%", label: "Faster Analysis" },
       { value: "90%", label: "Detection Rate" },
     ],
-    github: "https://github.com/chandruthehacker/log-parser",
-    blog: "https://chandruthehacker.github.io/portfolio-website-old/projects/all-projects/log-analysis/log-analysis.html",
+    github: "https://github.com/0xchandru/log-parser",
+    blog: "https://0xchandru.github.io/portfolio-website-old/projects/all-projects/log-analysis/log-analysis.html",
     detail: {
       tldr:
         "A Python CLI tool that auto-detects log format (Apache, Nginx, SSH, syslog), applies threat detection rules, and outputs structured reports as CSV or charts. Detected 90% of simulated attacks vs 70% manual review, 60% faster.",
