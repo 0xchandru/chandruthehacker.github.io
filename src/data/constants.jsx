@@ -31,16 +31,16 @@ export const Bio = {
     "Final-year CS student who builds detection systems, writes custom SIEM rules, and hunts threats in lab environments. " +
     "Completed 200+ TryHackMe rooms. Built 5 security tools. " +
     "Pursuing SOC Analyst roles where I can turn alerts into answers.",
-  github: "https://github.com/chandruthehacker",
+  github: "https://github.com/0xchandru",
   resume:
     "https://drive.google.com/file/d/1uvc_fGkEsu40CfaoMggKwQcCT0Ar4rPX/view?usp=sharing",
   gmail: "cyberchandru87@gmail.com",
   phone: "+919786475035",
   linkedin: "https://www.linkedin.com/in/chandraprakash-soc/",
-  twitter: "https://x.com/cyberchandru",
-  telegram: "https://t.me/chandruthehacker",
-  insta: "https://www.instagram.com/cyberchandru",
-  facebook: "https://www.facebook.com/chandru87125",
+  twitter: "https://x.com/0xchandru",
+  telegram: "https://t.me/0xchandru",
+  insta: "https://www.instagram.com/0xchandru",
+  facebook: "https://www.facebook.com/0xchandru",
   whatsapp: "https://wa.me/919786475035",
 };
 
@@ -298,8 +298,8 @@ export const projects = [
       { value: "200+", label: "Attacks Captured" },
       { value: "12", label: "Countries Tracked" },
     ],
-    github: "https://github.com/chandruthehacker/honeypot",
-    blog: "https://chandruthehacker.github.io/portfolio-website-old/projects/all-projects/honeypot/honeypot.html",
+    github: "https://github.com/0xchandru/honeypot",
+    blog: "https://0xchandru.github.io/portfolio-website-old/projects/all-projects/honeypot/honeypot.html",
     detail: {
       tldr:
         "Deployed a realistic fake admin login portal with Flask. Logged attacker IPs, user agents, browser fingerprints, and submitted credentials. Captured 200+ attempts in 14 days, mapped to 12 countries, and identified credential stuffing, dictionary attacks, and targeted probing.",
@@ -346,8 +346,8 @@ export const projects = [
       { value: "100%", label: "Weak Detection Rate" },
       { value: "100+", label: "Samples Tested" },
     ],
-    github: "https://github.com/chandruthehacker/password-strength-checker",
-    blog: "https://chandruthehacker.github.io/portfolio-website-old/projects/all-projects/password-checker/password-checker.html",
+    github: "https://github.com/0xchandru/password-strength-checker",
+    blog: "https://0xchandru.github.io/portfolio-website-old/projects/all-projects/password-checker/password-checker.html",
     detail: {
       tldr:
         "A client-side password strength analyzer that calculates entropy, detects common patterns and dictionary words, and provides color-coded feedback (Weak / Moderate / Strong). No backend, no data sent anywhere.",
@@ -449,7 +449,7 @@ export const practicalExposure = [
       "Analyzed 200+ simulated alerts.",
     tools: ["Splunk", "Wireshark", "MITRE ATT&CK", "Sysmon"],
     date: "Jan 2024 — Mar 2024",
-    proof: "https://tryhackme.com/p/chandruthehacker",
+    proof: "https://tryhackme.com/p/0xchandru",
   },
   {
     category: "LAB",
