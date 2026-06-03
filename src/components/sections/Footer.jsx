@@ -59,7 +59,7 @@ const Footer = () => {
   return (
     <FooterContainer>
       <FooterWrapper>
-        <Logo>&gt; chandru_</Logo>
+        <Logo>&gt; 0xchandru</Logo>
         <Nav>
           {[
             { label: "About", id: "About" },
