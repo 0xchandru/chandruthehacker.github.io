@@ -193,7 +193,7 @@ const Navbar = () => {
     <Nav $scrolled={scrolled}>
       <NavbarContainer>
         <Logo href="#About" onClick={(e) => { e.preventDefault(); scrollTo("About"); }}>
-          &gt; chandru_
+          &gt; 0xchandru
         </Logo>
 
         <NavItems>
