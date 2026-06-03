@@ -38,7 +38,7 @@ export const Bio = {
   phone: "+919786475035",
   linkedin: "https://www.linkedin.com/in/chandraprakash-soc/",
   twitter: "https://x.com/0xchandru",
-  telegram: "https://t.me/0xchandru",
+  telegram: "https://t.me/@oxchandru",
   insta: "https://www.instagram.com/0xchandru",
   facebook: "https://www.facebook.com/0xchandru",
   whatsapp: "https://wa.me/919786475035",
