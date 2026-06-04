@@ -18,6 +18,69 @@ import googleCyb from "../assets/certificates/google_cybersecurity.webp";
 import internshalaEth from "../assets/certificates/internshala_nsdc.webp";
 import splunkUdemy from "../assets/certificates/Udemy_Splunk.webp";
 import ibmCyb from "../assets/certificates/ibm_cybersecurity.webp";
+import ibmProfCyb from "../assets/certificates/ibm_cybersecurity_prof.webp";
+import tryhackmePreSecurity from "../assets/certificates/tryhackme_presecurity.webp";
+
+// Helpers: parse dates from loose strings and sort arrays descending (newest first)
+const parseDateString = (s) => {
+  if (s === undefined || s === null) return 0;
+  const text = String(s).trim();
+  if (/^\s*current\s*$/i.test(text)) return Number.POSITIVE_INFINITY;
+  // Try native parse first
+  const p = Date.parse(text);
+  if (!Number.isNaN(p)) return p;
+  // Fallback: extract year like 2026
+  const yearMatch = text.match(/(19|20)\d{2}/);
+  if (yearMatch) return new Date(Number(yearMatch[0]), 0, 1).getTime();
+  return 0;
+};
+
+const sortByDateDesc = (a, b) => parseDateString(b.date) - parseDateString(a.date);
+
+export const socialLinks = {
+  github: "https://github.com/0xchandru",
+  instagram: "https://www.instagram.com/0xchandru",
+  reddit: "https://www.reddit.com/user/0xchandru",
+  medium: "https://medium.com/@0xchandru",
+  hackTheBox: "https://app.hackthebox.com/profile/0xchandru",
+  tryHackMe: "https://tryhackme.com/p/0xchandru",
+  x: "https://x.com/0xchandru",
+  telegram: "https://t.me/0xchandru",
+  linkedin: "https://www.linkedin.com/in/chandraprakash-soc/",
+  facebook: "https://www.facebook.com/0xchandru",
+};
+
+export const seo = {
+  title: "Chandraprakash | B.Sc Computer Science Graduate & Cybersecurity Portfolio",
+  description:
+    "Chandraprakash is a B.Sc Computer Science graduate from GTN Arts College, Dindigul, focused on cybersecurity, SOC operations, SIEM, incident response, and hands-on TryHackMe training.",
+  keywords:
+    "Chandraprakash, Cybersecurity Portfolio, BSc Computer Science Graduate, GTN Arts College, SOC Analyst, SIEM, Splunk, Threat Detection, Log Analysis, Incident Response, TryHackMe, SOC Level 1, SOC Level 2",
+  ogTitle: "Chandraprakash | B.Sc Computer Science Graduate & Cybersecurity Portfolio",
+  ogDescription:
+    "Cybersecurity portfolio with graduate education details, live TryHackMe stats, security projects, and hands-on SOC training.",
+  twitterCreator: "@0xchandru",
+};
+
+export const tryHackMeProfile = {
+  username: "0xchandru",
+  profileUrl: socialLinks.tryHackMe,
+  endpoint:
+    process.env.REACT_APP_TRYHACKME_API_URL ||
+    "https://tryhackme.com/api/v2/public-profile?username=0xchandru",
+};
+
+export const tryHackMeFallbackProfile = {
+  username: "0xchandru",
+  rank: "Top 8%",
+  completedRooms: 58,
+  completedRoomsNumber: 58,
+  badgesNumber: 13,
+  totalPoints: 6290,
+  level: 8,
+  leagueTier: "bronze",
+  lastUpdated: "2026-06-04T13:00:00.000Z",
+};
 
 export const Bio = {
   name: "Chandraprakash",
@@ -28,49 +91,48 @@ export const Bio = {
   ],
   tagline: "I detect, investigate, and respond.",
   description:
-    "Final-year CS student who builds detection systems, writes custom SIEM rules, and hunts threats in lab environments. " +
-    "Completed 200+ TryHackMe rooms. Built 5 security tools. " +
-    "Pursuing SOC Analyst roles where I can turn alerts into answers.",
-  github: "https://github.com/0xchandru",
+    "B.Sc Computer Science graduate from GTN Arts College, Dindigul, with a strong interest in cybersecurity, SOC operations, threat detection, incident response, SIEM, log analysis, and security automation. " +
+    "Currently building hands-on experience through TryHackMe SOC Level 1 and SOC Level 2 learning paths.",
+  github: socialLinks.github,
   resume:
     "https://drive.google.com/file/d/1uvc_fGkEsu40CfaoMggKwQcCT0Ar4rPX/view?usp=sharing",
   gmail: "cyberchandru87@gmail.com",
   phone: "+919786475035",
-  linkedin: "https://www.linkedin.com/in/chandraprakash-soc/",
-  twitter: "https://x.com/0xchandru",
-  telegram: "https://t.me/@oxchandru",
-  insta: "https://www.instagram.com/0xchandru",
-  facebook: "https://www.facebook.com/0xchandru",
+  linkedin: socialLinks.linkedin,
+  twitter: socialLinks.x,
+  telegram: socialLinks.telegram,
+  insta: socialLinks.instagram,
+  facebook: socialLinks.facebook,
   whatsapp: "https://wa.me/919786475035",
 };
 
 export const stats = [
-  { value: "200+", label: "Labs Completed" },
-  { value: "5", label: "Projects Built" },
-  { value: "4", label: "Certifications" },
-  { value: "35+", label: "Detection Rules" },
+  { key: "rank", label: "TryHackMe Rank", source: "tryhackme", color: "#00ff88" },
+  { key: "rooms", label: "Rooms Completed", source: "tryhackme", color: "#00aaff" },
+  { key: "projects", label: "Projects Built", source: "projects", color: "#ffaa00" },
+  { key: "certificates", label: "Certifications", source: "certificates", color: "#ff6060" },
 ];
 
 export const aboutHighlights = [
   {
-    icon: "🔍",
-    label: "200+ TryHackMe rooms completed",
-    detail: "SOC L1 path, Pre-Security, Cyber Defense",
+    icon: "🎓",
+    label: "B.Sc Computer Science graduate",
+    detail: "GTN Arts College, Dindigul",
+  },
+  {
+    icon: "🧠",
+    label: "Hands-on cybersecurity training",
+    detail: "TryHackMe SOC Level 1 and SOC Level 2 paths",
   },
   {
     icon: "🛠️",
-    label: "5 security projects built and documented",
+    label: "Security projects built and documented",
     detail: "SIEM platform, honeypot, phishing analyzer, log parser",
   },
   {
     icon: "📜",
     label: "4 certifications earned",
     detail: "Google Cybersecurity, IBM, Splunk, Ethical Hacking",
-  },
-  {
-    icon: "🎯",
-    label: "Target role: SOC Analyst / Security Operations",
-    detail: "Available from 2025",
   },
 ];
 
@@ -154,7 +216,7 @@ export const projectCategories = [
   "Other",
 ];
 
-export const projects = [
+const _projects = [
   {
     id: 0,
     title: "SenSIEM",
@@ -379,7 +441,9 @@ Input: "P@ssw0rd!2024"
   },
 ];
 
-export const certificates = [
+export const projects = _projects.slice().sort(sortByDateDesc);
+
+const _certificates = [
   {
     id: 0,
     issuer: "IBM",
@@ -389,6 +453,18 @@ export const certificates = [
     status: "VERIFIED",
     image: ibmCyb,
     link: "https://www.credly.com/badges/2d74912f-a5e5-46d1-828f-2a331e46fdb1/public_url",
+    priority: 2,
+  },
+  {
+    id: 4,
+    issuer: "IBM",
+    title: "Cybersecurity Professional Analyst",
+    date: "June 2026",
+    skills: ["Threat Detection", "Incident Response", "Security Analysis", "SOC Foundations"],
+    status: "VERIFIED",
+    image: ibmProfCyb,
+    link: "https://www.coursera.org/account/accomplishments/specialization/US4R3ZXUCFTD",
+    priority: 5,
   },
   {
     id: 1,
@@ -399,6 +475,7 @@ export const certificates = [
     status: "VERIFIED",
     image: googleCyb,
     link: "https://www.coursera.org/account/accomplishments/professional-cert/TGJE3FRTFS2N",
+    priority: 4,
   },
   {
     id: 2,
@@ -409,6 +486,7 @@ export const certificates = [
     status: "VERIFIED",
     image: splunkUdemy,
     link: "https://www.udemy.com/certificate/UC-d1611f48-8dbb-4c43-9bde-9c0bfd0cf47c/",
+    priority: 1,
   },
   {
     id: 3,
@@ -419,13 +497,36 @@ export const certificates = [
     status: "VERIFIED",
     image: internshalaEth,
     link: "https://trainings.internshala.com/certificate/view/nsdc/1gvfiyruzvc/fj2c4mq927_/",
+    priority: 0,
+  },
+  {
+    id: 5,
+    issuer: "TryHackMe",
+    title: "Pre Security",
+    date: "June 2026",
+    skills: ["Linux Basics", "Networking", "Web Exploitation", "Security Fundamentals"],
+    status: "VERIFIED",
+    image: tryhackmePreSecurity,
+    link: "https://tryhackme.com/certificate/THM-CU9DITYUQO",
+    priority: 3,
   },
 ];
 
+const sortCertificates = (a, b) => {
+  const pa = Number(a.priority || 0);
+  const pb = Number(b.priority || 0);
+  if (pb - pa !== 0) return pb - pa;
+  return sortByDateDesc(a, b);
+};
+
+export const certificates = _certificates.slice().sort(sortCertificates);
+
 export const education = {
-  degree: "B.Sc in Computer Science",
+  degree: "B.Sc Computer Science",
   institution: "GTN Arts College, Dindigul",
-  period: "2023 — 2026 (Expected)",
+  period: "2023 - 2026 Completed",
+  status: "Completed",
+  cgpa: "8.01",
   img: collegeImg,
   relevantCoursework: [
     "Computer Networks",
@@ -433,33 +534,53 @@ export const education = {
     "Operating Systems",
     "Data Structures & Algorithms",
     "Database Management Systems",
-    "Information Security",
+    "Web Technologies",
+    "Software Engineering",
   ],
 };
 
-export const practicalExposure = [
-
+const _practicalExposure = [
   {
+    id: "tryhackme-training",
     category: "LAB",
-    title: "SOC Level 1 Analyst Path",
+    title: "TryHackMe Cybersecurity Training",
     platform: "TryHackMe",
+    type: "Hands-on Cybersecurity Training",
     description:
-      "Completed 48 rooms covering alert triage, SIEM log analysis, phishing email investigation, and endpoint detection. " +
-      "Worked with Splunk SPL queries and Wireshark packet analysis across simulated enterprise scenarios. " +
-      "Analyzed 200+ simulated alerts.",
-    tools: ["Splunk", "Wireshark", "MITRE ATT&CK", "Sysmon"],
-    date: "Jan 2024 — Mar 2024",
-    proof: "https://tryhackme.com/p/0xchandru",
-  },
-  {
-    category: "LAB",
-    title: "Blue Team Challenges",
-    platform: "CyberDefenders",
-    description:
-      "Completed Malware Traffic Analysis, Threat Hunting, and Log Analysis challenge sets. " +
-      "Parsed pcap files for C2 traffic patterns. Correlated IOCs against AlienVault OTX and VirusTotal threat intelligence feeds.",
-    tools: ["Wireshark", "VirusTotal", "AlienVault OTX", "Volatility"],
-    date: "Ongoing",
-    proof: null,
+      "Practical blue-team training focused on SOC workflows, log analysis, and threat investigation. Completed the SOC Level 1 path and am currently progressing through the SOC Level 2 path. Training covers Log Analysis, SIEM Fundamentals, Incident Response, Threat Hunting, Network Security, Endpoint Security, Digital Forensics, Windows Event Analysis, Splunk, Security Monitoring, Detection Engineering, and Investigation Workflows.",
+    focusAreas: [
+      "SOC Level 1",
+      "SOC Level 2",
+      "Cyber Defense",
+      "Pre Security",
+      "Incident Response",
+      "Threat Hunting",
+    ],
+    tools: ["SOC Level 1 Completed", "SOC Level 2 In Progress", "TryHackMe"],
+    date: "Current",
+    proof: socialLinks.tryHackMe,
   }
 ];
+
+export const practicalExposure = _practicalExposure.slice().sort(sortByDateDesc);
+
+export const practicalExposureConfig = {
+  title: "Practical Exposure",
+  subtitle:
+    "Hands-on cybersecurity training translated into a clear, resume-style experience.",
+  metrics: [
+    { key: "rank", label: "TryHackMe Rank", format: "text" },
+    { key: "completedRooms", label: "Rooms Completed", format: "number" },
+    { key: "badgesNumber", label: "Badges", format: "number" },
+    { key: "totalPoints", label: "Total Points", format: "number" },
+  ],
+  focus: {
+    title: "Core Focus",
+    caption: "Quick scan of the areas I have trained on most.",
+    visibleCount: 4,
+    expandLabel: "+{count} more",
+    collapseLabel: "Show less",
+  },
+  proofLabel: "Open Link ↗",
+  proofAriaLabel: "Open TryHackMe link",
+};

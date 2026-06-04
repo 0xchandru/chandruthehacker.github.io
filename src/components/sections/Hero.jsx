@@ -1,11 +1,12 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { Bio, stats } from "../../data/constants";
+import { Bio, certificates, projects, stats } from "../../data/constants";
 import Typewriter from "typewriter-effect";
 import HeroImg from "../../assets/profile/Hero.webp";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "../../utils/motion";
+import { useTryHackMeStats } from "../../hooks/useTryHackMeStats";
 
 const HeroSection = styled.section`
   min-height: calc(100vh - 72px);
@@ -180,16 +181,17 @@ const StatBar = styled(motion.div)`
 
 const StatItem = styled.div`
   padding: 12px 20px;
-  background: ${({ theme }) => theme.accent}08;
-  border: 1px solid ${({ theme }) => theme.accent}18;
-  border-radius: 10px;
+  background: ${({ $color }) => `${$color}14`};
+  border: 1px solid ${({ $color }) => `${$color}40`};
+  border-radius: 12px;
   text-align: center;
   min-width: 100px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
 
   .number {
     font-size: 22px;
     font-weight: 800;
-    color: ${({ theme }) => theme.accent};
+    color: ${({ $color }) => $color};
     font-family: monospace;
     line-height: 1;
   }
@@ -245,6 +247,40 @@ const scrollTo = (id) => {
 };
 
 const Hero = () => {
+  const { status, data } = useTryHackMeStats();
+
+  const resolvedStats = stats.map((item) => {
+    if (item.source !== "tryhackme") {
+      if (item.source === "projects") {
+        return {
+          label: item.label,
+          color: item.color || "#ffaa00",
+          value: projects.length,
+        };
+      }
+
+      if (item.source === "certificates") {
+        return {
+          label: item.label,
+          color: item.color || "#ff6060",
+          value: certificates.length,
+        };
+      }
+
+      return item;
+    }
+
+    const value = item.key === "rank"
+      ? data?.rank
+      : data?.completedRooms ?? data?.completedLabs;
+
+    return {
+      label: item.label,
+      color: item.color || "#00ff88",
+      value: status === "loading" ? "Loading..." : value || "Unavailable",
+    };
+  });
+
   return (
     <HeroSection id="About">
       <Inner
@@ -254,7 +290,7 @@ const Hero = () => {
         animate="visible"
       >
         <Left variants={fadeInUp}>
-          <Greeting>SOC Analyst Candidate</Greeting>
+          <Greeting>B.Sc Computer Science Graduate</Greeting>
           <Name>Hi, I'm {Bio.name}</Name>
 
           <RoleRow>
@@ -291,13 +327,14 @@ const Hero = () => {
           </ButtonRow>
 
           <StatBar variants={fadeInUp}>
-            {stats.map((s, i) => (
-              <StatItem key={i}>
+            {resolvedStats.map((s, i) => (
+              <StatItem key={i} $color={s.color}>
                 <div className="number">{s.value}</div>
                 <div className="label">{s.label}</div>
               </StatItem>
             ))}
           </StatBar>
+
         </Left>
 
         <Right variants={fadeInUp}>

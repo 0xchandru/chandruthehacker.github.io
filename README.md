@@ -1,37 +1,31 @@
 # 🔐 Chandraprakash's Cybersecurity Portfolio
 
-Welcome to my cybersecurity portfolio! This repository contains details about my skills, hands-on projects, and continuous learning as I work towards becoming a Security Analyst or SOC Analyst.
+Welcome to my cybersecurity portfolio! This repository contains details about my skills, hands-on projects, and hands-on cybersecurity training as I grow in SOC and blue-team work.
 
 ### 🔗 Weblink: [Live Website](https://chandraprakash.me)
 
 ## 👨‍💻 About Me
 
-I'm **Chandraprakash**, a passionate cybersecurity enthusiast and B.Sc. Computer Science student at GTN Arts College, Dindigul (Graduation: May 2026). I have a strong interest in defending digital systems, detecting threats, and building secure infrastructures.
+I'm **Chandraprakash**, a B.Sc. Computer Science graduate from GTN Arts College, Dindigul. I have a strong interest in defending digital systems, detecting threats, and building secure infrastructures.
 
-Cybersecurity has been my focus since 11th standard, and I'm continuously learning and building real-world projects in the blue team domain.
+Cybersecurity has been my focus since 11th standard, and I continue building real-world projects and practical SOC skills through TryHackMe and other lab work.
 
 ---
 
 ## 🛡️ Skills Overview
 
 ### 1. Security Operations
-- Threat Detection
-- Incident Response
-- Log Analysis
-- Alert Triage
-- SIEM Monitoring
 
 ### 2. Networking & Systems
-- TCP/IP
-- DNS, DHCP, FTP
-- Windows & Linux Administration
-- IDS/IPS
-- Firewalls
 
 ### 3. Tools & Platforms
 - Wireshark
 - Splunk
 - ELK Stack
+
+## TryHackMe Live Stats
+
+The live TryHackMe card reads from a server-side JSON endpoint configured with `REACT_APP_TRYHACKME_API_URL` and `REACT_APP_TRYHACKME_USERNAME`. Copy `.env.example` to a local `.env` file and point the API URL at your own proxy or serverless function that fetches public TryHackMe profile data.
 - Nmap
 - TryHackMe
 - Burp Suite

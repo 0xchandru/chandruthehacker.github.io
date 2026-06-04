@@ -2,6 +2,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./utils/Themes.js";
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/sections/Hero.jsx";
+import { Bio, education, seo, socialLinks } from "./data/constants";
 
 import React, { useState, useEffect, Suspense } from "react";
 import { Helmet } from "react-helmet";
@@ -44,6 +45,39 @@ const getInitialTheme = () => {
   return "dark";
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: Bio.name,
+  jobTitle: "Cybersecurity Graduate",
+  description: Bio.description,
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: education.institution,
+  },
+  url: "https://chandruthehacker.github.io/",
+  sameAs: [
+    socialLinks.github,
+    socialLinks.linkedin,
+    socialLinks.x,
+    socialLinks.telegram,
+    socialLinks.instagram,
+    socialLinks.reddit,
+    socialLinks.medium,
+    socialLinks.hackTheBox,
+    socialLinks.tryHackMe,
+  ],
+  knowsAbout: [
+    "SOC Operations",
+    "Incident Response",
+    "Threat Detection",
+    "SIEM",
+    "Log Analysis",
+    "Security Automation",
+    "TryHackMe",
+  ],
+};
+
 function App() {
   const [preloaderDone, setPreloaderDone] = useState(false);
   const [themeMode, setThemeMode] = useState(getInitialTheme);
@@ -70,14 +104,14 @@ function App() {
       ) : (
         <>
           <Helmet>
-            <title>Chandraprakash | Cybersecurity Portfolio</title>
+            <title>{seo.title}</title>
             <meta
               name="description"
-              content="Chandraprakash — SOC Analyst candidate. Builds detection systems, writes SIEM rules, and hunts threats. Explore real-world security projects."
+              content={seo.description}
             />
             <meta
               name="keywords"
-              content="Chandraprakash, Cybersecurity Portfolio, SOC Analyst, SIEM, Splunk, Threat Detection, Log Analysis, Blue Team, InfoSec, TryHackMe"
+              content={seo.keywords}
             />
             <meta name="author" content="Chandraprakash C" />
             <meta name="robots" content="index, follow" />
@@ -87,11 +121,17 @@ function App() {
             <link rel="icon" href="/favicon.ico" type="image/x-icon" />
             <meta property="og:type" content="website" />
             <meta property="og:url" content="https://chandruthehacker.github.io/" />
-            <meta property="og:title" content="Chandraprakash | Cybersecurity Portfolio" />
-            <meta property="og:description" content="SOC Analyst candidate. Security projects, certifications, and hands-on lab work." />
+            <meta property="og:title" content={seo.ogTitle} />
+            <meta property="og:description" content={seo.ogDescription} />
             <meta property="og:image" content="https://chandruthehacker.github.io/og-image-cybersecurity.jpg" />
+            <meta property="og:site_name" content="Chandraprakash Cybersecurity Portfolio" />
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:creator" content="@chandruthehacker" />
+            <meta name="twitter:creator" content={seo.twitterCreator} />
+            <meta name="twitter:title" content={seo.ogTitle} />
+            <meta name="twitter:description" content={seo.ogDescription} />
+            <script type="application/ld+json">
+              {JSON.stringify(structuredData)}
+            </script>
           </Helmet>
 
           <Navbar />

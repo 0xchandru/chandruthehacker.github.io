@@ -1,6 +1,6 @@
-# SOC Analyst Portfolio - Chandraprakash
+# Cybersecurity Portfolio - Chandraprakash
 
-A clean, recruiter-focused cybersecurity portfolio for a SOC Analyst candidate. Fully redesigned from a generic dev portfolio into a structured, professional security profile with MITRE-style UI patterns, terminal log blocks, category badges, and zero `dangerouslySetInnerHTML`.
+A clean, recruiter-focused cybersecurity portfolio for a B.Sc Computer Science graduate. Fully redesigned from a generic dev portfolio into a structured, professional security profile with MITRE-style UI patterns, terminal log blocks, category badges, and zero `dangerouslySetInnerHTML`.
 
 ## Tech Stack
 

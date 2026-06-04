@@ -1,5 +1,5 @@
 {
-  "name": "Chandraprakash Portfolio",
+  "name": "Chandraprakash | Cybersecurity Portfolio",
   "short_name": "CyberChandru",
   "icons": [
     {
@@ -16,5 +16,5 @@
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",
-  "theme_color": "#0f172a"
-}
+  "theme_color": "#090917",
+  "background_color": "#090917"

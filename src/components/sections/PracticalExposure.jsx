@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { practicalExposure } from "../../data/constants";
+import { practicalExposure, practicalExposureConfig } from "../../data/constants";
 import { fadeInUp, staggerContainer } from "../../utils/motion";
+import { useTryHackMeStats } from "../../hooks/useTryHackMeStats";
+import { useState } from "react";
 
 const Section = styled.section`
   padding: 80px 24px;
@@ -71,14 +73,31 @@ const Entry = styled(motion.div)`
 `;
 
 const EntryCard = styled.div`
-  background: ${({ theme }) => theme.card};
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    ${({ theme }) => theme.card},
+    ${({ theme }) => theme.card_light}
+  );
   border: 1px solid ${({ theme }) => theme.cardBorder};
-  border-radius: 12px;
-  padding: 22px 24px;
-  transition: border-color 0.25s ease;
+  border-radius: 22px;
+  padding: 30px;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 22px 46px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    background: linear-gradient(90deg, ${({ theme }) => theme.accent}, #00aaff, #00ff88);
+  }
 
   &:hover {
-    border-color: ${({ theme }) => theme.accent}25;
+    border-color: ${({ theme }) => theme.accent}40;
+    transform: translateY(-4px);
+    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.28);
   }
 `;
 
@@ -99,8 +118,8 @@ const EntryLeft = styled.div`
 `;
 
 const CategoryBadge = styled.span`
-  padding: 3px 10px;
-  border-radius: 4px;
+  padding: 4px 11px;
+  border-radius: 999px;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 1.2px;
@@ -138,8 +157,8 @@ const CategoryBadge = styled.span`
 `;
 
 const EntryTitle = styled.h3`
-  font-size: 17px;
-  font-weight: 700;
+  font-size: 23px;
+  font-weight: 800;
   color: ${({ theme }) => theme.text_primary};
   margin: 0;
 `;
@@ -160,10 +179,72 @@ const DateLine = styled.div`
 `;
 
 const Description = styled.p`
-  font-size: 14px;
-  line-height: 1.68;
+  font-size: 15px;
+  line-height: 1.78;
+  color: ${({ theme }) => theme.text_primary};
+  opacity: 0.9;
+  margin: 14px 0 20px;
+`;
+
+const LiveRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+`;
+
+const LiveStat = styled.div`
+  min-width: 0;
+  padding: 18px 18px 17px;
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    ${({ theme }) => theme.card_light},
+    ${({ theme }) => theme.card}
+  );
+  border: 1px solid ${({ theme }) => theme.cardBorder};
+  box-shadow: inset 0 0 0 1px ${({ theme }) => theme.accent}14, 0 10px 20px rgba(0, 0, 0, 0.12);
+`;
+
+const LiveLabel = styled.p`
+  margin: 0 0 6px;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.accent};
+  font-weight: 800;
+`;
+
+const LiveValue = styled.p`
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: ${({ theme }) => theme.text_primary};
+  line-height: 1.2;
+`;
+
+const HighlightBlock = styled.div`
+  margin-top: 14px;
+  padding: 16px 16px 14px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, ${({ theme }) => theme.card_light}, ${({ theme }) => theme.card});
+  border: 1px solid ${({ theme }) => theme.cardBorder};
+`;
+
+const HighlightTitle = styled.p`
+  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: ${({ theme }) => theme.text_primary};
+`;
+
+const HighlightCaption = styled.p`
+  margin: 0 0 12px;
+  font-size: 12px;
   color: ${({ theme }) => theme.text_secondary};
-  margin: 12px 0 14px;
+  line-height: 1.5;
 `;
 
 const ToolRow = styled.div`
@@ -174,35 +255,87 @@ const ToolRow = styled.div`
 `;
 
 const ToolChip = styled.span`
-  padding: 3px 9px;
-  background: ${({ theme }) => theme.card_light};
-  border: 1px solid ${({ theme }) => theme.cardBorder};
-  border-radius: 4px;
-  font-size: 11px;
+  padding: 8px 12px;
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid ${({ theme }) => theme.accent}2f;
+  border-radius: 999px;
+  font-size: 12px;
+  color: ${({ theme }) => theme.text_primary};
+  font-weight: 700;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+`;
+
+const MoreChip = styled(ToolChip)`
+  background: ${({ theme }) => theme.card};
   color: ${({ theme }) => theme.text_secondary};
-  font-weight: 500;
+  border-style: dashed;
+  cursor: pointer;
+  appearance: none;
+  border-radius: 999px;
+`;
+
+const ToggleChip = styled(MoreChip)`
+  background: ${({ theme }) => theme.accent};
+  color: #0a0a0a;
+  border-style: solid;
 `;
 
 const ProofLink = styled.a`
-  color: ${({ theme }) => theme.accent};
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 15px;
+  border-radius: 999px;
+  background: ${({ theme }) => theme.accent};
+  color: #0a0a0a;
   text-decoration: none;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 800;
   margin-left: 4px;
+  box-shadow: 0 12px 24px ${({ theme }) => theme.accent}44;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 
   &:hover {
-    text-decoration: underline;
+    opacity: 0.9;
+    transform: translateY(-1px);
   }
 `;
 
-const categoryColors = {
-  LAB: "#00ff88",
-  SIMULATION: "#00aaff",
-  RESEARCH: "#ffaa00",
-  COMPETITION: "#ff6060",
-};
-
 const PracticalExposure = () => {
+  const [expandedItemIds, setExpandedItemIds] = useState({});
+  const { status, data } = useTryHackMeStats();
+  const metricFormatter = new Intl.NumberFormat();
+
+  const getMetricValue = (metricKey) => {
+    if (!data) return "Unavailable";
+
+    const value = data[metricKey];
+    if (value === null || value === undefined || value === "") {
+      return "Unavailable";
+    }
+
+    return typeof value === "number" ? metricFormatter.format(value) : String(value);
+  };
+
+  const toggleExpanded = (itemId) => {
+    setExpandedItemIds((current) => ({
+      ...current,
+      [itemId]: !current[itemId],
+    }));
+  };
+
+  const getDisplayedMetric = (metric) => {
+    if (status === "loading") {
+      return "Loading...";
+    }
+
+    if (metric.format === "text") {
+      return getMetricValue(metric.key);
+    }
+
+    return getMetricValue(metric.key);
+  };
+
   return (
     <Section id="Exposure">
       <Inner
@@ -212,18 +345,27 @@ const PracticalExposure = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.05 }}
       >
-        <SectionTitle variants={fadeInUp}>Practical Exposure</SectionTitle>
-        <SectionSubtitle variants={fadeInUp}>
-          Hands-on security work across simulations, labs, and competitions — mapped to real SOC workflows.
-        </SectionSubtitle>
+        <SectionTitle variants={fadeInUp}>{practicalExposureConfig.title}</SectionTitle>
+        <SectionSubtitle variants={fadeInUp}>{practicalExposureConfig.subtitle}</SectionSubtitle>
 
         <Timeline>
           {practicalExposure.map((item, i) => (
             <Entry
-              key={i}
+              key={item.id || i}
               variants={fadeInUp}
-              $color={categoryColors[item.category] || "#888"}
+              $color="#00ff88"
             >
+              {(() => {
+                const isExpanded = Boolean(expandedItemIds[item.id || i]);
+                const focusAreas = item.focusAreas || item.tools || [];
+                const visibleCount = practicalExposureConfig.focus.visibleCount;
+                const visibleFocus = isExpanded ? focusAreas : focusAreas.slice(0, visibleCount);
+                const hiddenCount = Math.max(focusAreas.length - visibleFocus.length, 0);
+                const toggleLabel = isExpanded
+                  ? practicalExposureConfig.focus.collapseLabel
+                  : practicalExposureConfig.focus.expandLabel.replace("{count}", hiddenCount);
+
+                return (
               <EntryCard>
                 <EntryTop>
                   <EntryLeft>
@@ -240,21 +382,46 @@ const PracticalExposure = () => {
 
                 <Description>{item.description}</Description>
 
-                <ToolRow>
-                  {item.tools.map((tool, j) => (
-                    <ToolChip key={j}>{tool}</ToolChip>
+                <LiveRow>
+                  {practicalExposureConfig.metrics.map((metric) => (
+                    <LiveStat key={metric.key}>
+                      <LiveLabel>{metric.label}</LiveLabel>
+                      <LiveValue>
+                        {metric.key === "lastUpdated" && data?.lastUpdated
+                          ? new Date(data.lastUpdated).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })
+                          : getDisplayedMetric(metric)}
+                      </LiveValue>
+                    </LiveStat>
                   ))}
-                  {item.proof && (
-                    <ProofLink
-                      href={item.proof}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      View Proof ↗
-                    </ProofLink>
-                  )}
-                </ToolRow>
+                </LiveRow>
+
+                <HighlightBlock>
+                  <HighlightTitle>{practicalExposureConfig.focus.title}</HighlightTitle>
+                  <HighlightCaption>{practicalExposureConfig.focus.caption}</HighlightCaption>
+                  <ToolRow>
+                    {visibleFocus.map((tool, j) => (
+                      <ToolChip key={j}>{tool}</ToolChip>
+                    ))}
+                    {focusAreas.length > visibleCount && (
+                      <ToggleChip type="button" onClick={() => toggleExpanded(item.id || i)}>
+                        {toggleLabel}
+                      </ToggleChip>
+                    )}
+                    {item.proof && (
+                      <ProofLink
+                        href={item.proof}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={practicalExposureConfig.proofAriaLabel}
+                      >
+                        {practicalExposureConfig.proofLabel}
+                      </ProofLink>
+                    )}
+                  </ToolRow>
+                </HighlightBlock>
               </EntryCard>
+                );
+              })()}
             </Entry>
           ))}
         </Timeline>

@@ -191,7 +191,7 @@ const Education = () => {
       >
         <SectionTitle variants={fadeInUp}>Education</SectionTitle>
         <SectionSubtitle variants={fadeInUp}>
-          Academic foundation in computer science with cybersecurity focus.
+          Academic foundation in computer science with cybersecurity focus and completed graduation.
         </SectionSubtitle>
 
         <Card variants={fadeInUp}>
@@ -206,11 +206,16 @@ const Education = () => {
           <Info>
             <MetaRow>
               <MetaChip $accent>Cybersecurity Focus</MetaChip>
-              <MetaChip>Undergraduate</MetaChip>
+              <MetaChip>{education.status}</MetaChip>
             </MetaRow>
             <Degree>{education.degree}</Degree>
-            <Institution>{education.institution}</Institution>
-            <Period>{education.period}</Period>
+            <Institution>
+              {education.institution} • CGPA {education.cgpa}
+            </Institution>
+            <Period>
+              {education.period}
+            </Period>
+
             <HighlightsLabel>Key Areas</HighlightsLabel>
             <HighlightList>
               {(education.relevantCoursework || []).map((item, i) => (
