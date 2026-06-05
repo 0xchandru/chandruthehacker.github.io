@@ -45,7 +45,7 @@ export const socialLinks = {
   hackTheBox: "https://app.hackthebox.com/profile/0xchandru",
   tryHackMe: "https://tryhackme.com/p/0xchandru",
   x: "https://x.com/0xchandru",
-  telegram: "https://t.me/0xchandru",
+  telegram: "https://t.me/oxchandru",
   linkedin: "https://www.linkedin.com/in/chandraprakash-soc/",
   facebook: "https://www.facebook.com/0xchandru",
 };
@@ -58,28 +58,24 @@ export const seo = {
     "Chandraprakash, Cybersecurity Portfolio, BSc Computer Science Graduate, GTN Arts College, SOC Analyst, SIEM, Splunk, Threat Detection, Log Analysis, Incident Response, TryHackMe, SOC Level 1, SOC Level 2",
   ogTitle: "Chandraprakash | B.Sc Computer Science Graduate & Cybersecurity Portfolio",
   ogDescription:
-    "Cybersecurity portfolio with graduate education details, live TryHackMe stats, security projects, and hands-on SOC training.",
+    "Cybersecurity portfolio with graduate education details, TryHackMe stats, security projects, and hands-on SOC training.",
   twitterCreator: "@0xchandru",
 };
 
-export const tryHackMeProfile = {
+export const TRYHACKME_STATS = {
   username: "0xchandru",
   profileUrl: socialLinks.tryHackMe,
-  endpoint:
-    process.env.REACT_APP_TRYHACKME_API_URL ||
-    "https://tryhackme.com/api/v2/public-profile?username=0xchandru",
-};
-
-export const tryHackMeFallbackProfile = {
-  username: "0xchandru",
-  rank: "Top 8%",
-  completedRooms: 58,
-  completedRoomsNumber: 58,
-  badgesNumber: 13,
-  totalPoints: 6290,
-  level: 8,
-  leagueTier: "bronze",
-  lastUpdated: "2026-06-04T13:00:00.000Z",
+  rank: "Top 6%",
+  points: 7000,
+  roomsCompleted: 62,
+  badges: 20,
+  streak: 4,
+  level: 12,
+  completedRooms: 62,
+  completedLabs: 62,
+  totalCompleted: 62,
+  badgesNumber: 20,
+  totalPoints: 7000,
 };
 
 export const Bio = {

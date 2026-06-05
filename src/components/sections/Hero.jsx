@@ -1,12 +1,11 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { Bio, certificates, projects, stats } from "../../data/constants";
+import { Bio, TRYHACKME_STATS, certificates, projects, stats } from "../../data/constants";
 import Typewriter from "typewriter-effect";
 import HeroImg from "../../assets/profile/Hero.webp";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "../../utils/motion";
-import { useTryHackMeStats } from "../../hooks/useTryHackMeStats";
 
 const HeroSection = styled.section`
   min-height: calc(100vh - 72px);
@@ -247,8 +246,6 @@ const scrollTo = (id) => {
 };
 
 const Hero = () => {
-  const { status, data } = useTryHackMeStats();
-
   const resolvedStats = stats.map((item) => {
     if (item.source !== "tryhackme") {
       if (item.source === "projects") {
@@ -271,13 +268,13 @@ const Hero = () => {
     }
 
     const value = item.key === "rank"
-      ? data?.rank
-      : data?.completedRooms ?? data?.completedLabs;
+      ? TRYHACKME_STATS.rank
+      : TRYHACKME_STATS.completedRooms ?? TRYHACKME_STATS.roomsCompleted;
 
     return {
       label: item.label,
       color: item.color || "#00ff88",
-      value: status === "loading" ? "Loading..." : value || "Unavailable",
+      value: value || "Unavailable",
     };
   });
 

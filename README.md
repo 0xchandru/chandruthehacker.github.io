@@ -23,9 +23,9 @@ Cybersecurity has been my focus since 11th standard, and I continue building rea
 - Splunk
 - ELK Stack
 
-## TryHackMe Live Stats
+## TryHackMe Stats
 
-The live TryHackMe card reads from a server-side JSON endpoint configured with `REACT_APP_TRYHACKME_API_URL` and `REACT_APP_TRYHACKME_USERNAME`. Copy `.env.example` to a local `.env` file and point the API URL at your own proxy or serverless function that fetches public TryHackMe profile data.
+The TryHackMe stats shown in the portfolio are permanent default values defined in `src/data/constants.jsx`. The app does not call a TryHackMe API, proxy, scraper, or external stats service.
 - Nmap
 - TryHackMe
 - Burp Suite

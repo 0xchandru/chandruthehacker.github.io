@@ -1,10 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { practicalExposure, practicalExposureConfig } from "../../data/constants";
+import { TRYHACKME_STATS, practicalExposure, practicalExposureConfig } from "../../data/constants";
 import { fadeInUp, staggerContainer } from "../../utils/motion";
-import { useTryHackMeStats } from "../../hooks/useTryHackMeStats";
-import { useState } from "react";
 
 const Section = styled.section`
   padding: 80px 24px;
@@ -303,13 +301,10 @@ const ProofLink = styled.a`
 
 const PracticalExposure = () => {
   const [expandedItemIds, setExpandedItemIds] = useState({});
-  const { status, data } = useTryHackMeStats();
   const metricFormatter = new Intl.NumberFormat();
 
   const getMetricValue = (metricKey) => {
-    if (!data) return "Unavailable";
-
-    const value = data[metricKey];
+    const value = TRYHACKME_STATS[metricKey];
     if (value === null || value === undefined || value === "") {
       return "Unavailable";
     }
@@ -325,14 +320,6 @@ const PracticalExposure = () => {
   };
 
   const getDisplayedMetric = (metric) => {
-    if (status === "loading") {
-      return "Loading...";
-    }
-
-    if (metric.format === "text") {
-      return getMetricValue(metric.key);
-    }
-
     return getMetricValue(metric.key);
   };
 
@@ -387,8 +374,8 @@ const PracticalExposure = () => {
                     <LiveStat key={metric.key}>
                       <LiveLabel>{metric.label}</LiveLabel>
                       <LiveValue>
-                        {metric.key === "lastUpdated" && data?.lastUpdated
-                          ? new Date(data.lastUpdated).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })
+                        {metric.key === "lastUpdated" && TRYHACKME_STATS.lastUpdated
+                          ? new Date(TRYHACKME_STATS.lastUpdated).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })
                           : getDisplayedMetric(metric)}
                       </LiveValue>
                     </LiveStat>
