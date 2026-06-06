@@ -1,4 +1,4 @@
-import{j as t,s as a,m as e,f as o,a as l,g as i}from"./index-BI-JZHB4.js";const c=i.section`
+import{j as t,s as a,m as e,f as o,a as l,g as i}from"./index-BUojkeZd.js";const c=i.section`
   padding: 80px 24px;
   display: flex;
   justify-content: center;
