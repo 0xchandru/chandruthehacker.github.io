@@ -16,10 +16,8 @@ import sensiemImg from "../assets/projects/sensiem.webp";
 
 import googleCyb from "../assets/certificates/google_cybersecurity.webp";
 import internshalaEth from "../assets/certificates/internshala_nsdc.webp";
-import splunkUdemy from "../assets/certificates/Udemy_Splunk.webp";
-import ibmCyb from "../assets/certificates/ibm_cybersecurity.webp";
 import ibmProfCyb from "../assets/certificates/ibm_cybersecurity_prof.webp";
-import tryhackmePreSecurity from "../assets/certificates/tryhackme_presecurity.webp";
+import tryhackmeSoc1 from "../assets/certificates/tryhackme_soc1.webp";
 
 // Helpers: parse dates from loose strings and sort arrays descending (newest first)
 const parseDateString = (s) => {
@@ -434,24 +432,13 @@ const _certificates = [
   {
     id: 0,
     issuer: "IBM",
-    title: "Cybersecurity Fundamentals",
-    date: "August 2025",
-    skills: ["Network Security", "Threat Intelligence", "Cryptography", "Security Operations"],
-    status: "VERIFIED",
-    image: ibmCyb,
-    link: "https://www.credly.com/badges/2d74912f-a5e5-46d1-828f-2a331e46fdb1/public_url",
-    priority: 2,
-  },
-  {
-    id: 4,
-    issuer: "IBM",
     title: "Cybersecurity Professional Analyst",
     date: "June 2026",
     skills: ["Threat Detection", "Incident Response", "Security Analysis", "SOC Foundations"],
     status: "VERIFIED",
     image: ibmProfCyb,
     link: "https://www.coursera.org/account/accomplishments/specialization/US4R3ZXUCFTD",
-    priority: 5,
+    priority: 3,
   },
   {
     id: 1,
@@ -462,21 +449,10 @@ const _certificates = [
     status: "VERIFIED",
     image: googleCyb,
     link: "https://www.coursera.org/account/accomplishments/professional-cert/TGJE3FRTFS2N",
-    priority: 4,
+    priority: 2,
   },
   {
     id: 2,
-    issuer: "Udemy",
-    title: "Splunk Core Certified User",
-    date: "June 2025",
-    skills: ["SPL Queries", "Dashboards", "Alert Rules", "Log Correlation", "Saved Searches"],
-    status: "VERIFIED",
-    image: splunkUdemy,
-    link: "https://www.udemy.com/certificate/UC-d1611f48-8dbb-4c43-9bde-9c0bfd0cf47c/",
-    priority: 1,
-  },
-  {
-    id: 3,
     issuer: "Internshala / NSDC",
     title: "Ethical Hacking",
     date: "November 2024",
@@ -484,18 +460,18 @@ const _certificates = [
     status: "VERIFIED",
     image: internshalaEth,
     link: "https://trainings.internshala.com/certificate/view/nsdc/1gvfiyruzvc/fj2c4mq927_/",
-    priority: 0,
+    priority: 1,
   },
   {
-    id: 5,
+    id: 3,
     issuer: "TryHackMe",
-    title: "Pre Security",
+    title: "SOC Level 1",
     date: "June 2026",
-    skills: ["Linux Basics", "Networking", "Web Exploitation", "Security Fundamentals"],
+    skills: ["SOC Workflows", "Log Analysis", "Threat Investigation", "SIEM Fundamentals"],
     status: "VERIFIED",
-    image: tryhackmePreSecurity,
-    link: "https://tryhackme.com/certificate/THM-CU9DITYUQO",
-    priority: 3,
+    image: tryhackmeSoc1,
+    link: "https://tryhackme.com/certificate/THM-WUPYOBHE0K",
+    priority: 4,
   },
 ];
 
