@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { ReactComponent as Sun } from "./Sun.svg";
-import { ReactComponent as Moon } from "./Moon.svg";
+import Sun from "./Sun.svg?react";
+import Moon from "./Moon.svg?react";
 import "./DarkMode.css";
 
 const DarkMode = () => {
