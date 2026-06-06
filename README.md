@@ -72,7 +72,7 @@ To become a skilled **SOC Analyst** who can monitor, detect, and respond to cybe
 Feel free to connect or collaborate:
 
 - 📧 Email: cyberchandru87@gmail.com  
-- 🌐 Portfolio: [https://chandruthehacker.github.io](https://chandruthehacker.github.io)  
-- 🐙 GitHub: [github.com/chandruthehacker](https://github.com/chandruthehacker)
+- 🌐 Portfolio: [https://0xchandru.github.io](https://0xchandru.github.io)  
+- 🐙 GitHub: [github.com/0xchandru](https://github.com/0xchandru)
 
 ---

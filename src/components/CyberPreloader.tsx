@@ -158,7 +158,7 @@ const CyberPreloader: React.FC<{ onComplete?: () => void }> = ({ onComplete }) =
         </RadarContainer>
       </Centered>
 
-      <FooterText>chandruthehacker</FooterText>
+      <FooterText>0xchandru</FooterText>
     </PreloaderWrapper>
   );
 };
