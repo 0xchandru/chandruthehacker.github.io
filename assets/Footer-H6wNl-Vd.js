@@ -1,4 +1,4 @@
-import{j as t,g as o}from"./index-Ye7iTiMt.js";const n=o.footer`
+import{j as t,g as o}from"./index-BI-JZHB4.js";const n=o.footer`
   border-top: 1px solid ${({theme:e})=>e.cardBorder};
   padding: 40px 24px;
   display: flex;
