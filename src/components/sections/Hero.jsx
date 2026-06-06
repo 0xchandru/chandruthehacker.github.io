@@ -269,7 +269,7 @@ const Hero = () => {
 
     const value = item.key === "rank"
       ? TRYHACKME_STATS.rank
-      : TRYHACKME_STATS.completedRooms ?? TRYHACKME_STATS.roomsCompleted;
+      : TRYHACKME_STATS.completedRooms;
 
     return {
       label: item.label,

@@ -63,19 +63,10 @@ export const seo = {
 };
 
 export const TRYHACKME_STATS = {
-  username: "0xchandru",
-  profileUrl: socialLinks.tryHackMe,
-  rank: "Top 6%",
-  points: 7000,
-  roomsCompleted: 62,
+  rank: "Top 3%",
+  totalPoints: 11962,
+  completedRooms: 100,
   badges: 20,
-  streak: 4,
-  level: 12,
-  completedRooms: 62,
-  completedLabs: 62,
-  totalCompleted: 62,
-  badgesNumber: 20,
-  totalPoints: 7000,
 };
 
 export const Bio = {
@@ -567,11 +558,11 @@ export const practicalExposureConfig = {
   metrics: [
     { key: "rank", label: "TryHackMe Rank", format: "text" },
     { key: "completedRooms", label: "Rooms Completed", format: "number" },
-    { key: "badgesNumber", label: "Badges", format: "number" },
+    { key: "badges", label: "Badges", format: "number" },
     { key: "totalPoints", label: "Total Points", format: "number" },
   ],
   focus: {
-    title: "Core Focus",
+    title: "Completed Training Paths",
     caption: "Quick scan of the areas I have trained on most.",
     visibleCount: 4,
     expandLabel: "+{count} more",
