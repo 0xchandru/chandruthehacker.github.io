@@ -61,10 +61,10 @@ export const seo = {
 };
 
 export const TRYHACKME_STATS = {
-  rank: "Top 3%",
-  totalPoints: 11962,
-  completedRooms: 100,
-  badges: 20,
+  rank: "Top 1%",
+  totalPoints: 17374,
+  completedRooms: 149,
+  badges: 28,
 };
 
 export const Bio = {
